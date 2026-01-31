@@ -1,0 +1,13 @@
+{
+  "name": "example",
+  "private": true,
+  "description": "v-atom example",
+  "author": "wshiqyuan",
+  "license": "MIT",
+  "main": "",
+  "module": "",
+  "files": [],
+  "scripts": {
+    "build": ""
+  }
+}
