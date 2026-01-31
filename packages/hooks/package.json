@@ -1,0 +1,14 @@
+{
+  "name": "@v-atom/hooks",
+  "version": "0.0.1",
+  "description": "hooks library for atom",
+  "author": "wshiqyuan",
+  "license": "MIT",
+  "main": "",
+  "module": "",
+  "files": [],
+  "scripts": {
+    "build": ""
+  },
+  "dependencies": {}
+}

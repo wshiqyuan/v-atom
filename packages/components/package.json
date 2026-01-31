@@ -1,0 +1,23 @@
+{
+  "name": "@v-atom/components",
+  "version": "0.0.1",
+  "description": "All components are settled here",
+  "author": "wshiqyuan",
+  "license": "MIT",
+  "main": "",
+  "module": "",
+  "files": [],
+  "scripts": {
+    "build": "tsdown"
+  },
+  "peerDependencies": {
+    "vue": "catalog:"
+  },
+  "dependencies": {
+    "@v-atom/hooks": "workspace:*",
+    "@v-atom/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "vue": "catalog:"
+  }
+}
