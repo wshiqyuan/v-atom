@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./",
+    "declaration": true,
+    "declarationMap": true
+  },
+  "include": [
+    "./**/*"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "**/__tests__/**/*",
+    "**/node_modules/**/*",
+    "vite.config.ts",
+    "package.json"
+  ]
+}

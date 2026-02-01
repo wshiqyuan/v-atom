@@ -1,6 +1,5 @@
 import type { UserConfig } from 'tsdown'
 import { defineConfig } from 'tsdown'
-import Vue from 'unplugin-vue/rolldown'
 
 export function createTsdownConfig(options: {
   entry: UserConfig['entry']
@@ -10,11 +9,9 @@ export function createTsdownConfig(options: {
     entry: options.entry,
     format: ['esm'],
     platform: 'neutral',
-    plugins: [Vue({ isProduction: true })],
-    dts: { vue: true },
+    dts: true,
     clean: true,
     external: [
-      'vue',
       ...(options.external || []),
     ],
   })
