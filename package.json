@@ -1,5 +1,6 @@
 {
   "name": "v-atom",
+  "type": "module",
   "workspaces": [
     "packages/*",
     "docs"
@@ -14,17 +15,23 @@
     "ts",
     "ui"
   ],
+  "engines": {
+    "node": "20.19.0"
+  },
   "scripts": {
-    "build": "pnpm -r --filter './packages/*' run build"
+    "build": "pnpm -r --filter './packages/*' run build",
+    "lint": "eslint . && oxlint .",
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "catalog:",
-    "eslint": "catalog:",
-    "tsdown": "catalog:",
-    "turbo": "catalog:",
-    "typescript": "catalog:",
-    "unplugin-vue": "catalog:",
-    "vue": "catalog:",
-    "vue-tsc": "catalog:"
+    "@antfu/eslint-config": "catalog:dev",
+    "@antfu/ni": "catalog:dev",
+    "eslint": "catalog:dev",
+    "eslint-plugin-oxlint": "catalog:dev",
+    "oxlint": "catalog:dev",
+    "tsdown": "catalog:dev",
+    "turbo": "catalog:dev",
+    "typescript": "catalog:dev",
+    "unplugin-vue": "catalog:dev"
   }
 }

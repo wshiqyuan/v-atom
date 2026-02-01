@@ -2,22 +2,32 @@
   "name": "@v-atom/components",
   "version": "0.0.1",
   "description": "All components are settled here",
-  "author": "wshiqyuan",
   "license": "MIT",
-  "main": "",
-  "module": "",
-  "files": [],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsdown"
+    "build": "tsdown",
+    "dev": "tsdown --watch"
   },
   "peerDependencies": {
-    "vue": "catalog:"
+    "vue": ">=3"
   },
   "dependencies": {
     "@v-atom/hooks": "workspace:*",
     "@v-atom/utils": "workspace:*"
   },
   "devDependencies": {
-    "vue": "catalog:"
+    "tsdown": "catalog:dev",
+    "vue": "catalog:dev"
   }
 }

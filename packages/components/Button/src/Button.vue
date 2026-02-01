@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import type { ButtonProps } from './type'
 
+defineOptions({
+  name: 'VaButton',
+})
+
 defineProps<ButtonProps>()
 </script>
 

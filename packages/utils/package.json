@@ -1,14 +1,24 @@
 {
   "name": "@v-atom/utils",
-  "version": "0.0.1",
   "description": "atom utils",
-  "author": "wshiqyuan",
   "license": "MIT",
-  "main": "",
-  "module": "",
-  "files": [],
-  "scripts": {
-    "build": ""
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
   },
-  "dependencies": {}
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch"
+  },
+  "devDependencies": {
+    "tsdown": "catalog:dev"
+  }
 }
