@@ -1,0 +1,72 @@
+:root{
+  /* colors */
+  --va-color-white: #fefefe;
+  --va-color-black: #0e100f;
+  --colors: (
+    primary: #1781b5,
+    success: #70c870,
+    warning: #f9c116,
+    danger: #ed5126,
+    info: #b2bbbe
+  );
+
+  @each $val, $color in var(--colors) {
+    --va-color-$(val): $(color);
+    @for $i from 3 to 9 by 2 {
+      --va-color-$(val)-light-$(i): mix(#fff, $(color), .$(i))
+    }
+    --va-color-$(val)-light-3: mix(#fff, $(color), .8);
+    --va-color-$(val)-dark-2: mix(#000, $(color), .2);
+  }
+
+  --va-bg-color: #fefefe;
+  --va-bg-color-page: #f2f3f5;
+  --va-bg-color-overlay: #fefefe;
+  --va-text-color-primary: #303133;
+  --va-text-color-regular: #606266;
+  --va-text-color-secondary: #909399;
+  --va-text-color-placeholder: #a8abb2;
+  --va-text-color-disabled: #c0c4cc;
+  --va-border-color: #dcdfe6;
+  --va-border-color-light: #e4e7ed;
+  --va-border-color-lighter: #ebeef5;
+  --va-border-color-extra-light: #f2f6fc;
+  --va-border-color-dark: #d4d7de;
+  --va-border-color-darker: #cdd0d6;
+  --va-fill-color: #f0f2f5;
+  --va-fill-color-light: #f5f7fa;
+  --va-fill-color-lighter: #fafafa;
+  --va-fill-color-extra-light: #fafcff;
+  --va-fill-color-dark: #ebedf0;
+  --va-fill-color-darker: #e6e8eb;
+  --va-fill-color-blank: #fefefe;
+
+  /* border */
+  --va-border-width: 1px;
+  --va-border-style: solid;
+  --va-border-color-hover: var(--va-text-color-disabled);
+  --va-border: var(--va-border-width) var(--va-border-style) var(--va-border-color);
+  --va-border-radius-base: 4px;
+  --va-border-radius-small: 2px;
+  --va-border-radius-round: 20px;
+  --va-border-radius-circle: 100%;
+
+  /*font*/
+  --va-font-size-extra-large: 20px;
+  --va-font-size-large: 18px;
+  --va-font-size-medium: 16px;
+  --va-font-size-base: 14px;
+  --va-font-size-small: 13px;
+  --va-font-size-extra-small: 12px;
+  --va-font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "\5fae\8f6f\96c5\9ed1", Arial, sans-serif;
+  --va-font-weight-primary: 500;
+
+  /*disabled*/
+  --va-disabled-bg-color: var(--va-fill-color-light);
+  --va-disabled-text-color: var(--va-text-color-placeholder);
+  --va-disabled-border-color: var(--va-border-color-light);
+  
+  /*animation*/
+  --va-transition-duration: .3s;
+  --va-transition-duration-fast: .2s;
+}

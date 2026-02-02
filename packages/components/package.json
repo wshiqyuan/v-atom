@@ -28,6 +28,11 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "catalog:dev",
     "@vitejs/plugin-vue-jsx": "catalog:dev",
+    "postcss-color-mix": "catalog:components",
+    "postcss-each": "catalog:components",
+    "postcss-each-variables": "catalog:components",
+    "postcss-for": "catalog:components",
+    "postcss-nested": "catalog:components",
     "vite": "catalog:dev",
     "vite-plugin-dts": "catalog:dev",
     "vue": "catalog:dev"
