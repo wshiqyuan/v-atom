@@ -4,15 +4,14 @@ import oxlint from 'eslint-plugin-oxlint'
 
 export default antfu(
   {
-    ...oxlint.configs['flat/recommended'],
+    vue: true,
+    typescript: true,
     rules: {
       'no-console': 'off',
     },
-  },
-  {
-    files: ['examples/**'],
-    rules: {
-      'pnpm/json-enforce-catalog': 'off',
-    },
+    ...oxlint.configs['flat/recommended'],
+    ignores: [
+      'examples/**',
+    ],
   },
 )

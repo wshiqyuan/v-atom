@@ -1,19 +1,19 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
 import type { ButtonProps } from './type'
+import { ref } from 'vue'
 
 defineOptions({
   name: 'VaButton',
 })
 
 withDefaults(defineProps<ButtonProps>(), {
-  nativeType: 'button'
+  nativeType: 'button',
 })
 
 const _ref = ref<HTMLButtonElement>()
 
 defineExpose({
-  ref: _ref
+  ref: _ref,
 })
 </script>
 
@@ -36,7 +36,3 @@ defineExpose({
     <slot />
   </button>
 </template>
-
-<style scoped>
-
-</style>
