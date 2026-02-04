@@ -22,6 +22,9 @@
     "vue": ">=3"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "catalog:components",
+    "@fortawesome/free-solid-svg-icons": "catalog:components",
+    "@fortawesome/vue-fontawesome": "catalog:components",
     "@v-atom/hooks": "workspace:*",
     "@v-atom/utils": "workspace:*"
   },

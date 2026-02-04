@@ -2,12 +2,15 @@
 import { ref } from 'vue'
 import { Button } from '../node_modules/@v-atom/components/button'
 import { Collapse, CollapseItem } from '../node_modules/@v-atom/components/collapse'
+import { Icon } from '../node_modules/@v-atom/components/icon'
 
 const openValue = ref(['a'])
 </script>
 
 <template>
   <div>
+    <Icon icon="fa-solid fa-house-user" color="#1781b5" />
+
     <Button ref="buttonRef">Test Button</Button>
     <Button plain>Plain Button</Button>
     <Button round>Round Button</Button>
@@ -24,7 +27,9 @@ const openValue = ref(['a'])
     <Button type="warning" plain>Warning</Button>
     <Button type="danger" plain>Danger</Button><br/><br/>
     <Button size="large">Large</Button>
-    <Button size="small">Small</Button>
+    <Button size="small">Small</Button><br/><br/>
+    <Button type="primary" loading>Primary</Button>
+    <Button type="primary" icon="arrow-up">icon</Button>
     
     <Collapse v-model="openValue" accordion>
       <CollapseItem name="a">

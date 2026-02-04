@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { CollapseItemProps } from './types'
 import { computed, inject } from 'vue'
+import { Icon } from '../../icon'
 import { collapseContextKey } from './types'
 
 defineOptions({
@@ -63,6 +64,7 @@ const transtionEvents: Record<string, (el: HTMLElement) => void> = {
       <slot name="title">
         {{ title }}
       </slot>
+      <Icon icon="angle-right" class="header-angle" />
     </div>
     <Transition name="slide" v-on="transtionEvents">
       <div v-show="isActive" class="va-collapse-item__wrapper">

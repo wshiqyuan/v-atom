@@ -78,6 +78,9 @@
     background-color: var(--va-button-disabled-bg-color);
     border-color: var(--va-button-disabled-border-color);
   }
+  [class*=va-icon] + span {
+    margin-left: 6px;
+  }
 }
 @each $val in primary,success,warning,info,danger {
   .va-button--$(val) {

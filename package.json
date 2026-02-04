@@ -23,6 +23,10 @@
     "lint": "eslint . && oxlint .",
     "lint:fix": "eslint . --fix"
   },
+  "dependencies": {
+    "@types/lodash-es": "catalog:types",
+    "lodash-es": "catalog:dep"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:dev",
     "@antfu/ni": "catalog:dev",
