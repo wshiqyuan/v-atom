@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { Button } from '../node_modules/@v-atom/components/button'
 import { Collapse, CollapseItem } from '../node_modules/@v-atom/components/collapse'
 import { Icon } from '../node_modules/@v-atom/components/icon'
+import { Alert } from '../node_modules/@v-atom/components/alert'
 
 const openValue = ref(['a'])
 </script>
@@ -47,6 +48,12 @@ const openValue = ref(['a'])
       </CollapseItem>
     </Collapse>
     {{ openValue }}
+
+    <Alert type="primary" title="title" content="test" />
+    <Alert type="success" content="test"/>
+    <Alert type="info" content="test" />
+    <Alert type="danger" content="test" />
+    <Alert type="warning" content="test" />
   </div>
 </template>
 
