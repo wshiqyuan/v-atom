@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { defineConfig } from 'vite'
@@ -19,7 +20,7 @@ export default defineConfig({
       fileName: 'v-atom',
       formats: ['es'],
     },
-    rolldownOptions: {
+    rollupOptions: {
       external: ['vue'],
       output: {
         globals: {
@@ -28,7 +29,11 @@ export default defineConfig({
       },
     },
     sourcemap: true,
-    minify: 'oxc',
+    minify: 'esbuild',
     emptyOutDir: true,
+  },
+  test: {
+    environment: 'jsdom',
+    globals: true,
   },
 })

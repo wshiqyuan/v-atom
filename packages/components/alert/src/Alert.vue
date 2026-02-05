@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { Slots } from 'vue'
 import type { AlertEmits, AlertInstance, AlertProps } from './types'
 import { ref, useSlots } from 'vue'
 import { Icon } from '../../icon'
@@ -15,7 +16,7 @@ withDefaults(defineProps<AlertProps>(), {
 })
 
 const emits = defineEmits<AlertEmits>()
-const slots = useSlots()
+const slots: Slots = useSlots()
 
 const visible = ref(true)
 

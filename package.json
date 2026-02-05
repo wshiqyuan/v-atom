@@ -19,6 +19,7 @@
     "node": "20.19.0"
   },
   "scripts": {
+    "test": "vitest",
     "build": "turbo build",
     "lint": "eslint . && oxlint .",
     "lint:fix": "eslint . --fix"
@@ -30,11 +31,14 @@
   "devDependencies": {
     "@antfu/eslint-config": "catalog:dev",
     "@antfu/ni": "catalog:dev",
+    "@vitejs/plugin-vue": "catalog:dev",
+    "@vitejs/plugin-vue-jsx": "catalog:dev",
     "eslint": "catalog:dev",
     "eslint-plugin-oxlint": "catalog:dev",
     "oxlint": "catalog:dev",
     "tsdown": "catalog:dev",
     "turbo": "catalog:dev",
-    "typescript": "catalog:dev"
+    "typescript": "catalog:dev",
+    "vitest": "catalog:dev"
   }
 }
