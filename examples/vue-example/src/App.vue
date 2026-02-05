@@ -49,11 +49,17 @@ const openValue = ref(['a'])
     </Collapse>
     {{ openValue }}
 
-    <Alert type="primary" title="title" content="test" />
-    <Alert type="success" content="test"/>
-    <Alert type="info" content="test" />
-    <Alert type="danger" content="test" />
-    <Alert type="warning" content="test" />
+    <Alert show-icon type="primary" title="test error">
+      <span>tess content</span>
+    </Alert>
+    <Alert show-icon type="success" content="test">
+      <template #title>
+        <h1>test title</h1>
+      </template>
+    </Alert>
+    <Alert show-icon type="info" content="test" />
+    <Alert show-icon type="danger" content="test" />
+    <Alert show-icon type="warning" content="test" />
   </div>
 </template>
 

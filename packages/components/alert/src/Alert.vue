@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import type { AlertEmits, AlertInstance, AlertProps } from './types'
-import { ref } from 'vue'
+import { ref, useSlots } from 'vue'
 import { Icon } from '../../icon'
+import { IconTypeMap } from './types'
 
 defineOptions({
   name: 'VaAlert',
@@ -10,9 +11,11 @@ defineOptions({
 withDefaults(defineProps<AlertProps>(), {
   effect: 'dark',
   closable: true,
+  showIcon: false,
 })
 
 const emits = defineEmits<AlertEmits>()
+const slots = useSlots()
 
 const visible = ref(true)
 
@@ -36,14 +39,15 @@ defineExpose<AlertInstance>({
         [`va-alert__${effect}`]: effect,
       }"
     >
+      <div v-if="showIcon" class="va-alert__icon">
+        <Icon :icon="IconTypeMap[type]" />
+      </div>
       <div class="va-alert__content">
-        <div v-if="title" class="va-alert__header">
-          <span>
-            <slot name="title">
-              {{ title }}
-            </slot>
-          </span>
-        </div>
+        <span v-if="!!(slots.title || title)" class="va-alert__content__header">
+          <slot name="title">
+            {{ title }}
+          </slot>
+        </span>
         <span>
           <slot>
             {{ content }}
