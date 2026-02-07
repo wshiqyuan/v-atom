@@ -20,7 +20,7 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
-  "include": ["packages/**/*.ts", "tsdown.config.ts", "packages/components/collapse/__test__/collapse.test.tsx"],
+  "include": ["packages/**/*.ts", "tsdown.config.ts", "packages/components/collapse/__test__/collapse.test.tsx", "packages/components/alert/__test__/alert.test.tsx"],
   "exclude": [
     "node_modules",
     "dist",

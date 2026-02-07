@@ -14,11 +14,9 @@ describe('button.vue', () => {
         default: 'button',
       },
     })
-    console.log(wrapper.html())
     expect(wrapper.classes()).toContain('va-button--primary')
     expect(wrapper.get('button').text()).toBe('button')
     wrapper.get('button').trigger('click')
-    console.log(wrapper.emitted())
     expect(wrapper.emitted()).toHaveProperty('click')
   })
   it('button disabled', () => {

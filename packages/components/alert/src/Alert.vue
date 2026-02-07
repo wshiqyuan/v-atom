@@ -13,6 +13,7 @@ withDefaults(defineProps<AlertProps>(), {
   effect: 'dark',
   closable: true,
   showIcon: false,
+  type: 'primary',
 })
 
 const emits = defineEmits<AlertEmits>()
