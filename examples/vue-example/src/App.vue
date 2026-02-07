@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { Tooltip } from '../node_modules/@v-atom/components/tooltip'
 import { Button } from '../node_modules/@v-atom/components/button'
 import { Collapse, CollapseItem } from '../node_modules/@v-atom/components/collapse'
 import { Icon } from '../node_modules/@v-atom/components/icon'
@@ -60,6 +61,13 @@ const openValue = ref(['a'])
     <Alert show-icon type="info" content="test" />
     <Alert show-icon type="danger" content="test" />
     <Alert show-icon type="warning" content="test" />
+
+    <Tooltip content="test">
+      <div>Tooltip test div</div>
+      <template #content>
+        <h1>Hello</h1>
+      </template>
+    </Tooltip>
   </div>
 </template>
 

@@ -25,6 +25,7 @@
     "@fortawesome/fontawesome-svg-core": "catalog:components",
     "@fortawesome/free-solid-svg-icons": "catalog:components",
     "@fortawesome/vue-fontawesome": "catalog:components",
+    "@popperjs/core": "catalog:components",
     "@v-atom/hooks": "workspace:*",
     "@v-atom/utils": "workspace:*"
   },
