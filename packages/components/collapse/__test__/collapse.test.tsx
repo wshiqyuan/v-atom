@@ -1,12 +1,20 @@
+import type { DOMWrapper, VueWrapper } from '@vue/test-utils'
 import { mount } from '@vue/test-utils'
-import { describe, expect, it, vi } from 'vitest'
+import { beforeAll, describe, expect, it, vi } from 'vitest'
 import Collapse from '../src/Collapse.vue'
 import CollapseItem from '../src/CollapseItem.vue'
 
+let wrapper: VueWrapper
+let headers: DOMWrapper<Element>[], contents: DOMWrapper<Element>[]
+let firstHeader: DOMWrapper<Element>, firstContent: DOMWrapper<Element>,
+  secondHeader: DOMWrapper<Element>, secondContent: DOMWrapper<Element>,
+  disabledHeader: DOMWrapper<Element>, disabledContent: DOMWrapper<Element>
+
+const onChange = vi.fn()
+
 describe('collapse.vue', () => {
-  it('basic collapse', async () => {
-    const onChange = vi.fn()
-    const wrapper = mount(() => (
+  beforeAll(() => {
+    wrapper = mount(() => (
       <Collapse modelValue={['a']} onChange={onChange}>
         <CollapseItem name="a" title="title a">
           content a
@@ -24,36 +32,39 @@ describe('collapse.vue', () => {
       },
       attachTo: document.body,
     })
-    const headers = wrapper.findAll('.va-collapse-item__header')
-    const contents = wrapper.findAll('.va-collapse-item__wrapper')
+    headers = wrapper.findAll('.va-collapse-item__header')
+    contents = wrapper.findAll('.va-collapse-item__wrapper')
 
-    // 长度
+    firstHeader = headers[0]
+    firstContent = contents[0]
+    secondHeader = headers[1]
+    secondContent = contents[1]
+    disabledHeader = headers[2]
+    disabledContent = contents[2]
+  })
+  it('测试基础结构以及对应文本内容', () => {
     expect(headers.length).toBe(3)
     expect(contents.length).toBe(3)
 
-    // 文本
-    const firstHeader = headers[0]
     expect(firstHeader.text()).toBe('title a')
 
-    // 内容
-    const firstContent = contents[0]
-    const secondContent = contents[1]
     expect(firstContent.isVisible()).toBeTruthy()
     expect(secondContent.isVisible()).toBeFalsy()
     expect(firstContent.text()).toBe('content a')
-
-    // 行为
+  })
+  it('点击标题展开/关闭内容', async () => {
     await firstHeader.trigger('click')
     expect(firstContent.isVisible()).toBeFalsy()
-    const secondHeader = headers[1]
     await secondHeader.trigger('click')
     expect(secondContent.isVisible()).toBeTruthy()
+  })
+  it('发送正确的事件', () => {
+    expect(onChange).toHaveBeenCalledTimes(2)
     expect(onChange).toHaveBeenCalledWith([])
     expect(onChange).toHaveBeenLastCalledWith(['b'])
-
-    // disabled
-    const disabledHeader = headers[2]
-    const disabledContent = contents[2]
+  })
+  it('disabled', async () => {
+    onChange.mockClear()
     expect(disabledHeader.classes()).toContain('is-disabled')
     await disabledHeader.trigger('click')
     expect(disabledContent.isVisible()).toBeFalsy()
