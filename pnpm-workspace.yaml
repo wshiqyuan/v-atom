@@ -12,13 +12,13 @@ catalogs:
     '@fortawesome/fontawesome-svg-core': ^7.1.0
     '@fortawesome/free-solid-svg-icons': ^7.1.0
     '@fortawesome/vue-fontawesome': ^3.1.3
-    '@popperjs/core': ^2.11.8
     postcss-color-mix: ^1.1.0
     postcss-each: ^1.1.0
     postcss-each-variables: ^0.3.0
     postcss-for: ^2.1.1
     postcss-nested: ^7.0.2
   dep:
+    '@popperjs/core': ^2.11.8
     lodash-es: ^4.17.23
   dev:
     '@antfu/eslint-config': ^7.2.0

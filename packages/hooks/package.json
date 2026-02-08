@@ -3,11 +3,25 @@
   "version": "0.0.1",
   "description": "hooks library for atom",
   "license": "MIT",
-  "main": "",
-  "module": "",
-  "files": [],
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist/**"
+  ],
   "scripts": {
-    "build": ""
+    "build": "tsdown",
+    "dev": "tsdown --watch"
   },
-  "dependencies": {}
+  "peerDependencies": {
+    "vue": "catalog:dev"
+  },
+  "dependencies": {
+    "@popperjs/core": "catalog:dep"
+  },
+  "devDependencies": {
+    "@vue/test-utils": "catalog:dev",
+    "tsdown": "catalog:dev",
+    "vue": "catalog:dev"
+  }
 }

@@ -62,7 +62,7 @@ const openValue = ref(['a'])
     <Alert show-icon type="danger" content="test" />
     <Alert show-icon type="warning" content="test" />
 
-    <Tooltip content="test">
+    <Tooltip content="test" trigger="click">
       <div>Tooltip test div</div>
       <template #content>
         <h1>Hello</h1>

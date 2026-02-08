@@ -1,7 +1,7 @@
 import type { Placement } from '@popperjs/core'
 
 export interface TooltipProps {
-  trigge?: 'hover' | 'click'
+  trigger?: 'hover' | 'click'
   content?: string
   placement?: Placement
 }

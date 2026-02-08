@@ -12,6 +12,7 @@ export default defineConfig({
       root: '.',
       tsconfigPath: './tsconfig.json',
       outDir: 'dist/types',
+      exclude: ['**/__tests__/'],
     }),
   ],
   build: {
