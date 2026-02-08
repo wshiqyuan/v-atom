@@ -27,7 +27,8 @@
     "@fortawesome/vue-fontawesome": "catalog:components",
     "@popperjs/core": "catalog:dep",
     "@v-atom/hooks": "workspace:*",
-    "@v-atom/utils": "workspace:*"
+    "@v-atom/utils": "workspace:*",
+    "lodash-es": "catalog:dep"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "catalog:dev",

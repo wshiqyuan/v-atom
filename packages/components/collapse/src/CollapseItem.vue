@@ -15,7 +15,9 @@ const collapseContext = inject(collapseContextKey)
 const isActive = computed(() => collapseContext?.activeNames.value.includes(props.name))
 
 function handleClick() {
-  if (props.disabled) { return }
+  if (props.disabled) {
+    return
+  }
   collapseContext?.handleItemClick(props.name)
 }
 

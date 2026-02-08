@@ -216,6 +216,9 @@ importers:
       '@v-atom/utils':
         specifier: workspace:*
         version: link:../utils
+      lodash-es:
+        specifier: catalog:dep
+        version: 4.17.23
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: catalog:dev
