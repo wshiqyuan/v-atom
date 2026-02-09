@@ -28,6 +28,14 @@ let outerEvents: Record<string, any> = reactive({})
 const popperOptions = computed(() => {
   return {
     placement: props.placement,
+    modifiers: [
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 9],
+        },
+      },
+    ],
     ...props.popperOptions,
   }
 })
@@ -147,6 +155,7 @@ defineExpose<TooltipInstance>({
         <slot name="content">
           {{ content }}
         </slot>
+        <div id="arrow" data-popper-arrow />
       </div>
     </Transition>
   </div>
