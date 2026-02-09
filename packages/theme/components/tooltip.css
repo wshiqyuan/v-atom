@@ -4,6 +4,7 @@
   --va-popover-border-color: var(--va-border-color);
   --va-popover-padding: 12px;
   --va-popover-border-radius: 4px;
+  --va-box-shadow-light: 0 2px 12px 0 rgba(0, 0, 0, .2);
   display: inline-block;
 }
 

@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, h } from 'vue'
+import type { MenuOption } from '../node_modules/@v-atom/components/dropdown/src/types'
+import { Dropdown } from '../node_modules/@v-atom/components/dropdown'
 import { Tooltip } from '../node_modules/@v-atom/components/tooltip'
 import { Button } from '../node_modules/@v-atom/components/button'
 import { Collapse, CollapseItem } from '../node_modules/@v-atom/components/collapse'
@@ -7,6 +9,27 @@ import { Icon } from '../node_modules/@v-atom/components/icon'
 import { Alert } from '../node_modules/@v-atom/components/alert'
 
 const openValue = ref(['a'])
+
+const menuOptions: MenuOption[] = [
+  {
+    label: h('b', 'this is bold'),
+    key: '1'
+  },
+  {
+    label: 'Option 2',
+    key: '2',
+    disabled: true
+  },
+  {
+    label: 'Option 3',
+    key: '3',
+    divided: true
+  },
+  {
+    label: 'Option 4',
+    key: '4'
+  }
+]
 </script>
 
 <template>
@@ -62,12 +85,12 @@ const openValue = ref(['a'])
     <Alert show-icon type="danger" content="test" />
     <Alert show-icon type="warning" content="test" />
 
-    <Tooltip content="test" trigger="hover" :popper-options="{ placement: 'bottom-start', strategy: 'fixed' }" :open-delay="200" :close-delay="500">
+    <Dropdown content="test" trigger="click" :menu-options="menuOptions">
       <div>Tooltip test div</div>
       <template #content>
         <h1>Hello</h1>
       </template>
-    </Tooltip>
+    </Dropdown>
   </div>
 </template>
 
