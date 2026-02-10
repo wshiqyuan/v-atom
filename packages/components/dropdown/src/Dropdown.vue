@@ -1,14 +1,17 @@
 <script lang="ts" setup>
-import type { Ref } from 'vue'
 import type { TooltipInstance } from '../../tooltip/src/types'
 import type { DropdownEmits, DropdownInstance, DropdownProps, MenuOption } from './types'
 import { ref } from 'vue'
 import RenderVnode from '../../common/RenderVnode'
 import Tooltip from '../../tooltip/src/Tooltip.vue'
 
+defineOptions({
+  name: 'VaDropdown',
+})
+
 const props = withDefaults(defineProps<DropdownProps>(), { hideAfterClick: true })
 const emits = defineEmits<DropdownEmits>()
-const tooltipRef = ref() as Ref<TooltipInstance>
+const tooltipRef = ref<TooltipInstance>()
 
 function visibleChange(e: boolean) {
   emits('visibleChange', e)
@@ -25,8 +28,8 @@ function itemClick(e: MenuOption) {
 }
 
 defineExpose<DropdownInstance>({
-  show: tooltipRef.value?.show,
-  hide: tooltipRef.value?.hide,
+  show: () => tooltipRef.value?.show(),
+  hide: () => tooltipRef.value?.hide(),
 })
 </script>
 

@@ -6,6 +6,10 @@ import { useClickOutside } from '@v-atom/hooks/index'
 import { debounce } from 'lodash-es'
 import { computed, onUnmounted, reactive, ref, watch } from 'vue'
 
+defineOptions({
+  name: 'VaTooltip',
+})
+
 const props = withDefaults(defineProps<TooltipProps>(), {
   placement: 'bottom',
   trigger: 'hover',
