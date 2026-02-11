@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, h } from 'vue'
+import { ref, h, onMounted } from 'vue'
 import type { MenuOption } from '../node_modules/@v-atom/components/dropdown/src/types'
 import { Dropdown } from '../node_modules/@v-atom/components/dropdown'
-import { Tooltip } from '../node_modules/@v-atom/components/tooltip'
+import { createMessage } from '../node_modules/@v-atom/components/message/src/method'
 import { Button } from '../node_modules/@v-atom/components/button'
 import { Collapse, CollapseItem } from '../node_modules/@v-atom/components/collapse'
 import { Icon } from '../node_modules/@v-atom/components/icon'
@@ -30,6 +30,17 @@ const menuOptions: MenuOption[] = [
     key: '4'
   }
 ]
+
+onMounted(() => {
+  createMessage({
+    message: 'hello world',
+    duration: 0
+  })
+  createMessage({
+    message: 'hello world again',
+    duration: 0
+  })
+})
 </script>
 
 <template>
