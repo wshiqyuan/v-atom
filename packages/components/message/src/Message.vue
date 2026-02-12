@@ -1,9 +1,8 @@
 <script lang="ts" setup>
 import type { MessageProps } from './types'
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import RenderVnode from '../../common/RenderVnode'
 import Icon from '../../icon/src/Icon.vue'
-import { getLastBottomOffset } from './method'
 
 defineOptions({
   name: 'VaMessage',
@@ -17,14 +16,8 @@ const props = withDefaults(defineProps<MessageProps>(), {
 
 const visible = ref(false)
 
-const messageRef = ref<HTMLDivElement>()
-
-const height = ref(0)
-const lastOffset = computed(() => getLastBottomOffset(props.id))
-const topOffset = computed(() => props.offset + lastOffset.value)
-const bottomOffset = computed(() => height.value + topOffset.value)
 const cssStyle = computed(() => ({
-  top: `${topOffset.value}px`,
+  marginTop: `${props.offset}px`,
 }))
 
 function startTimer() {
@@ -36,28 +29,21 @@ function startTimer() {
   }, props.duration)
 }
 
-onMounted(async () => {
+onMounted(() => {
   visible.value = true
   startTimer()
-  await nextTick()
-  height.value = messageRef.value!.getBoundingClientRect().height
 })
 
 watch(visible, (newValue) => {
-  if (!newValue && props.onDestory) {
-    props.onDestory()
+  if (!newValue && props.onDestroy) {
+    props.onDestroy()
   }
-})
-
-defineExpose({
-  bottomOffset,
 })
 </script>
 
 <template>
   <div
     v-show="visible"
-    ref="messageRef"
     class="va-message"
     role="alert"
     :class="{
@@ -83,10 +69,7 @@ defineExpose({
 <style>
 .va-message {
   width: max-content;
-  position: fixed;
-  left: 50%;
-  top: 20px;
-  transform: translateX(-50%);
+  position: relative;
   border: 1px solid blue;
 }
 </style>

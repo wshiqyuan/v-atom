@@ -1,33 +1,60 @@
 import type { CreateMessageProps, MessageContext } from './types'
-import { h, reactive, render } from 'vue'
+import { h, render } from 'vue'
 import MessageConstructor from './Message.vue'
 
 let seed = 1
 
-const instances: MessageContext[] = reactive([])
+const instances: MessageContext[] = []
+
+const injectContainer = (() => {
+  if (typeof window !== 'undefined') {
+    const container = document.createElement('div')
+    container.className = 'va-message-container'
+    return container
+  }
+  return null
+})()
+
+function createBox() {
+  const item = document.createElement('div')
+  item.className = 'va-message__item'
+  if (!injectContainer)
+    return item
+  injectContainer.appendChild(item)
+  return item
+}
+
 export function createMessage(props: CreateMessageProps) {
   const id = `message_${seed++}`
 
-  const container = document.createElement('div')
-  const destory = () => {
+  const dom = createBox()
+
+  const destroy = () => {
     const idx = instances.findIndex(instance => instance.id === id)
-    if (idx === -1) {
+    if (idx === -1)
       return
-    }
     instances.splice(idx, 1)
-    render(null, container)
+    render(null, dom)
+    if (dom.parentNode)
+      dom.parentNode.removeChild(dom)
+
+    if (injectContainer && instances.length === 0) {
+      document.body.removeChild(injectContainer)
+    }
   }
 
   const newProps = {
     ...props,
     id,
-    onDestory: destory,
+    onDestroy: destroy,
   }
 
   const vnode = h(MessageConstructor, newProps)
-  render(vnode, container)
+  render(vnode, dom)
 
-  document.body.appendChild(container.firstElementChild!)
+  if (injectContainer && !injectContainer.parentNode) {
+    document.body.appendChild(injectContainer)
+  }
 
   const vm = vnode.component!
 
@@ -39,19 +66,4 @@ export function createMessage(props: CreateMessageProps) {
   }
   instances.push(instance)
   return instance
-}
-
-export function getLastInstance() {
-  return instances.at(-1)
-}
-
-export function getLastBottomOffset(id: string) {
-  const idx = instances.findIndex(instance => instance.id === id)
-  if (idx <= 0) {
-    return 0
-  }
-  else {
-    const prev = instances[idx - 1]
-    return prev.vm.exposed!.bottomOffset.value
-  }
 }

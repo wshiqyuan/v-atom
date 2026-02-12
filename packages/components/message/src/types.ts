@@ -5,7 +5,7 @@ export interface MessageProps {
   duration?: number
   showClose?: boolean
   type?: 'info' | 'success' | 'warning' | 'error'
-  onDestory: () => void
+  onDestroy: () => void
   id: string
   offset?: number
 }
@@ -17,4 +17,4 @@ export interface MessageContext {
   props: MessageProps
 }
 
-export type CreateMessageProps = Omit<MessageProps, 'onDestory' | 'id'>
+export type CreateMessageProps = Omit<MessageProps, 'onDestroy' | 'id'>
