@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { MessageProps } from './types'
+import { useEventListener } from '@v-atom/hooks/index'
 import { computed, onMounted, ref, watch } from 'vue'
 import RenderVnode from '../../common/RenderVnode'
 import Icon from '../../icon/src/Icon.vue'
@@ -18,15 +19,21 @@ const visible = ref(false)
 
 const cssStyle = computed(() => ({
   marginTop: `${props.offset}px`,
+  zIndex: props.zIndex,
 }))
 
+let timer: any
 function startTimer() {
   if (props.duration === 0) {
     return
   }
-  setTimeout(() => {
+  timer = setTimeout(() => {
     visible.value = false
   }, props.duration)
+}
+
+function clearTimer() {
+  clearTimeout(timer)
 }
 
 onMounted(() => {
@@ -34,10 +41,23 @@ onMounted(() => {
   startTimer()
 })
 
+function keydown(e: Event) {
+  const event = e as KeyboardEvent
+  if (event.code === 'Escape') {
+    visible.value = false
+  }
+}
+
+useEventListener(document, 'keydown', keydown)
+
 watch(visible, (newValue) => {
   if (!newValue && props.onDestroy) {
     props.onDestroy()
   }
+})
+
+defineExpose({
+  visible,
 })
 </script>
 
@@ -51,6 +71,8 @@ watch(visible, (newValue) => {
       'is-close': showClose,
     }"
     :style="cssStyle"
+    @mouseenter="clearTimer"
+    @mouseleave="startTimer"
   >
     <div class="va-message__content">
       <slot>
@@ -61,15 +83,10 @@ watch(visible, (newValue) => {
       </slot>
     </div>
     <div v-if="showClose" class="va-message__close">
-      <Icon icon="xmark" />
+      <Icon icon="xmark" @click.stop="visible = false" />
     </div>
   </div>
 </template>
 
 <style>
-.va-message {
-  width: max-content;
-  position: relative;
-  border: 1px solid blue;
-}
 </style>

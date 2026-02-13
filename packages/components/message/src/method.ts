@@ -1,4 +1,5 @@
 import type { CreateMessageProps, MessageContext } from './types'
+import { useZIndex } from '@v-atom/hooks/index'
 import { h, render } from 'vue'
 import MessageConstructor from './Message.vue'
 
@@ -25,36 +26,48 @@ function createBox() {
 }
 
 export function createMessage(props: CreateMessageProps) {
+  if (!injectContainer)
+    return
+
+  if (!injectContainer.parentNode) {
+    document.body.appendChild(injectContainer)
+  }
+
+  const { nextZIndex } = useZIndex()
+
   const id = `message_${seed++}`
 
-  const dom = createBox()
+  const $dom = createBox()
 
   const destroy = () => {
     const idx = instances.findIndex(instance => instance.id === id)
     if (idx === -1)
       return
     instances.splice(idx, 1)
-    render(null, dom)
-    if (dom.parentNode)
-      dom.parentNode.removeChild(dom)
+    render(null, $dom)
+    $dom.remove()
 
     if (injectContainer && instances.length === 0) {
-      document.body.removeChild(injectContainer)
+      injectContainer.remove()
+    }
+  }
+
+  const manualDestroy = () => {
+    const _instance = instances.find(instance => instance.id === id)
+    if (_instance) {
+      _instance.vm.exposed!.visible.value = false
     }
   }
 
   const newProps = {
     ...props,
     id,
+    zIndex: nextZIndex(),
     onDestroy: destroy,
   }
 
   const vnode = h(MessageConstructor, newProps)
-  render(vnode, dom)
-
-  if (injectContainer && !injectContainer.parentNode) {
-    document.body.appendChild(injectContainer)
-  }
+  render(vnode, $dom)
 
   const vm = vnode.component!
 
@@ -63,6 +76,7 @@ export function createMessage(props: CreateMessageProps) {
     vnode,
     vm,
     props: newProps,
+    manualDestroy,
   }
   instances.push(instance)
   return instance

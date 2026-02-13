@@ -15,7 +15,7 @@
     @for $i from 3 to 9 by 2 {
       --va-color-$(val)-light-$(i): mix(#fff, $(color), .$(i))
     }
-    --va-color-$(val)-light-3: mix(#fff, $(color), .8);
+    --va-color-$(val)-light-8: mix(#fff, $(color), .8);
     --va-color-$(val)-dark-2: mix(#000, $(color), .2);
   }
 

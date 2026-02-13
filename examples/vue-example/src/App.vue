@@ -34,19 +34,24 @@ const menuOptions: MenuOption[] = [
 onMounted(() => {
   createMessage({
     message: 'hello world',
-    duration: 3000
+    duration: 0,
+    type: 'danger',
+    showClose: true
   })
   createMessage({
     message: 'hello world again',
-    duration: 2000
+    duration: 0,
+    showClose: true
   })
   createMessage({
     message: 'hello world again',
-    duration: 1500
+    duration: 0,
+    type: 'success'
   })
   createMessage({
     message: 'hello world again',
-    duration: 1000
+    duration: 0,
+    type: 'warning'
   })
 })
 </script>

@@ -4,8 +4,9 @@ export interface MessageProps {
   message?: string | VNode
   duration?: number
   showClose?: boolean
-  type?: 'info' | 'success' | 'warning' | 'error'
+  type?: 'info' | 'success' | 'warning' | 'danger'
   onDestroy: () => void
+  zIndex: number
   id: string
   offset?: number
 }
@@ -15,6 +16,7 @@ export interface MessageContext {
   vnode: VNode
   vm: ComponentInternalInstance
   props: MessageProps
+  manualDestroy: () => void
 }
 
-export type CreateMessageProps = Omit<MessageProps, 'onDestroy' | 'id'>
+export type CreateMessageProps = Omit<MessageProps, 'onDestroy' | 'id' | 'zIndex'>
