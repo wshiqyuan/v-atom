@@ -34,7 +34,7 @@ const menuOptions: MenuOption[] = [
 onMounted(() => {
   createMessage({
     message: 'hello world',
-    duration: 0,
+    duration: 3000,
     type: 'danger',
     showClose: true
   })

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { MessageProps } from './types'
 import { useEventListener } from '@v-atom/hooks/index'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import RenderVnode from '../../common/RenderVnode'
 import Icon from '../../icon/src/Icon.vue'
 
@@ -13,6 +13,7 @@ const props = withDefaults(defineProps<MessageProps>(), {
   duration: 3000,
   type: 'info',
   offset: 20,
+  transitionName: 'fade-up',
 })
 
 const visible = ref(false)
@@ -50,11 +51,9 @@ function keydown(e: Event) {
 
 useEventListener(document, 'keydown', keydown)
 
-watch(visible, (newValue) => {
-  if (!newValue && props.onDestroy) {
-    props.onDestroy()
-  }
-})
+function destroyComponent() {
+  props.onDestroy()
+}
 
 defineExpose({
   visible,
@@ -62,31 +61,33 @@ defineExpose({
 </script>
 
 <template>
-  <div
-    v-show="visible"
-    class="va-message"
-    role="alert"
-    :class="{
-      [`va-message--${type}`]: type,
-      'is-close': showClose,
-    }"
-    :style="cssStyle"
-    @mouseenter="clearTimer"
-    @mouseleave="startTimer"
+  <Transition
+    :name="transitionName"
+    @after-leave="destroyComponent"
   >
-    <div class="va-message__content">
-      <slot>
-        <RenderVnode
-          v-if="message"
-          :vnode="message"
-        />
-      </slot>
+    <div
+      v-show="visible"
+      class="va-message"
+      role="alert"
+      :class="{
+        [`va-message--${type}`]: type,
+        'is-close': showClose,
+      }"
+      :style="cssStyle"
+      @mouseenter="clearTimer"
+      @mouseleave="startTimer"
+    >
+      <div class="va-message__content">
+        <slot>
+          <RenderVnode
+            v-if="message"
+            :vnode="message"
+          />
+        </slot>
+      </div>
+      <div v-if="showClose" class="va-message__close">
+        <Icon icon="xmark" @click.stop="visible = false" />
+      </div>
     </div>
-    <div v-if="showClose" class="va-message__close">
-      <Icon icon="xmark" @click.stop="visible = false" />
-    </div>
-  </div>
+  </Transition>
 </template>
-
-<style>
-</style>

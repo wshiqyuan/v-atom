@@ -9,6 +9,7 @@ export interface MessageProps {
   zIndex: number
   id: string
   offset?: number
+  transitionName?: string
 }
 
 export interface MessageContext {

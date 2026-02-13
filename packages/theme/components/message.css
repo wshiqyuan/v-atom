@@ -39,7 +39,7 @@
   padding: var(--va-message-padding);
   display: flex;
   align-items: center;
-  transition: top var(--va-transition-duration), opacity var(--va-transition-duration), transform var(--va-transition-duration);
+  transition: all var(--va-transition-duration);
   .va-message__content {
     color: var(--va-message-text-color);
     overflow-wrap: anywhere;
@@ -68,5 +68,11 @@
 .va-message.fade-up-enter-from,
 .va-message.fade-up-leave-to {
   opacity: 0;
-  transform: translate(-50%, -100%);
+  transform: translate(-50%, calc(-100% - 0.25em));
+}
+
+.va-message.fade-up-enter-to,
+.va-message.fade-up-leave-from {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
