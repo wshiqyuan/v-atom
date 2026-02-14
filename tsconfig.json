@@ -20,7 +20,7 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
-  "include": ["packages/**/*.ts"],
+  "include": ["packages/**/*.ts", "docs/**/*.ts"],
   "exclude": [
     "node_modules",
     "dist",

@@ -1,0 +1,13 @@
+:root {
+  --vp-c-brand-1: var(--va-color-primary);
+  --vp-button-brand-bg: var(--va-color-primary);
+  --vp-button-brand-hover-bg: var(--va-color-primary-dark-2);
+}
+
+body {
+  color: var(--vp-c-text-1);
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  color: var(--vp-c-text-1);
+}
