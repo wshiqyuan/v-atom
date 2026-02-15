@@ -8,6 +8,4 @@ import './custom.css'
 
 library.add(fas)
 
-export default {
-  extends: Theme,
-}
+export default Theme
