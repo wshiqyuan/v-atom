@@ -1,5 +1,5 @@
-import { componentPreview, containerPreview } from '@vitepress-demo-preview/plugin'
 import { defineConfig } from 'vitepress'
+import { vitepressDemoPlugin } from 'vitepress-demo-plugin'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -7,8 +7,7 @@ export default defineConfig({
   description: 'Vue-based UI component library',
   markdown: {
     config(md) {
-      md.use(containerPreview)
-      md.use(componentPreview)
+      md.use(vitepressDemoPlugin)
     },
   },
   themeConfig: {

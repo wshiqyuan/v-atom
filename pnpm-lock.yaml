@@ -87,15 +87,12 @@ catalogs:
       specifier: ^3.5.27
       version: 3.5.27
   docs:
-    '@vitepress-demo-preview/component':
-      specifier: ^2.6.1
-      version: 2.6.1
-    '@vitepress-demo-preview/plugin':
-      specifier: ^1.4.1
-      version: 1.4.1
     vitepress:
       specifier: 2.0.0-alpha.16
       version: 2.0.0-alpha.16
+    vitepress-demo-plugin:
+      specifier: ^1.5.1
+      version: 1.5.1
   types:
     '@types/lodash-es':
       specifier: ^4.17.12
@@ -155,15 +152,27 @@ importers:
         specifier: catalog:components
         version: 7.1.0
     devDependencies:
-      '@vitepress-demo-preview/component':
-        specifier: catalog:docs
-        version: 2.6.1(vitepress@2.0.0-alpha.16(@types/node@24.10.9)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2))(vue@3.5.27(typescript@5.9.3))
-      '@vitepress-demo-preview/plugin':
-        specifier: catalog:docs
-        version: 1.4.1(markdown-it-container@3.0.0)(vitepress@2.0.0-alpha.16(@types/node@24.10.9)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2))(vue@3.5.27(typescript@5.9.3))
+      postcss-color-mix:
+        specifier: catalog:components
+        version: 1.1.0
+      postcss-each:
+        specifier: catalog:components
+        version: 1.1.0(postcss@8.5.6)
+      postcss-each-variables:
+        specifier: catalog:components
+        version: 0.3.0
+      postcss-for:
+        specifier: catalog:components
+        version: 2.1.1
+      postcss-nested:
+        specifier: catalog:components
+        version: 7.0.2(postcss@8.5.6)
       vitepress:
         specifier: catalog:docs
         version: 2.0.0-alpha.16(@types/node@24.10.9)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
+      vitepress-demo-plugin:
+        specifier: catalog:docs
+        version: 1.5.1(shiki@3.22.0)(vitepress@2.0.0-alpha.16(@types/node@24.10.9)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2))(vue@3.5.27(typescript@5.9.3))
       vue:
         specifier: catalog:dev
         version: 3.5.27(typescript@5.9.3)
@@ -847,18 +856,6 @@ packages:
     peerDependenciesMeta:
       '@noble/hashes':
         optional: true
-
-  '@floating-ui/core@1.7.4':
-    resolution: {integrity: sha512-C3HlIdsBxszvm5McXlB8PeOEWfBhcGBTZGkGlWc2U0KFY5IwG5OQEuQ8rq52DZmcHDlPLd+YFBK+cZcytwIFWg==}
-
-  '@floating-ui/dom@1.1.1':
-    resolution: {integrity: sha512-TpIO93+DIujg3g7SykEAGZMDtbJRrmnYRCNYSjJlvIbGhBjRSNTLVbNeDQBrzy9qDgUbiWdc7KA0uZHZ2tJmiw==}
-
-  '@floating-ui/utils@0.2.10':
-    resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
-
-  '@flypeng/tool@5.7.5':
-    resolution: {integrity: sha512-3/TMouPSQiKcvV4sL/Jog20codkmEObYr0Pn4xJl6J+XEyb1rN/HqaQve2Kv5GhsbBC4s7YSlGcmOCC9CgH9aA==}
 
   '@fortawesome/fontawesome-common-types@7.1.0':
     resolution: {integrity: sha512-l/BQM7fYntsCI//du+6sEnHOP6a74UixFyOYUyz2DLMXKx+6DEhfR3F2NYGE45XH1JJuIamacb4IZs9S0ZOWLA==}
@@ -1583,22 +1580,6 @@ packages:
       vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
       vue: ^3.2.25
 
-  '@vitepress-demo-preview/component@2.6.1':
-    resolution: {integrity: sha512-Yg88vBgtnjG6UhxZOqAbpdsYVFLAYSugvhjCnrlfOj+sCckF7JaVFhWi1KgWsORJRToftjTGtLwnFWPlpqdG9A==}
-    peerDependencies:
-      vitepress: '*'
-      vue: ^3.2.0
-
-  '@vitepress-demo-preview/core@0.3.0':
-    resolution: {integrity: sha512-DZTUvrn/89p8DxOTnFeZGvUnHgoA1daHwqX9r2WpuPYluoz4azFsbMWSi/2Qg+qZ038fNNe0ZofZb1zydicklQ==}
-
-  '@vitepress-demo-preview/plugin@1.4.1':
-    resolution: {integrity: sha512-RYmEieW2URgxw276ztlQfvGeyXjErx0ZyebNUQAFPINXFKdn58b228QqpvwGnsiy0WMxOTUgdH9KUHdX5cfA9w==}
-    peerDependencies:
-      markdown-it-container: ^3.0.0
-      vitepress: '*'
-      vue: ^3.2.0
-
   '@vitest/eslint-plugin@1.6.6':
     resolution: {integrity: sha512-bwgQxQWRtnTVzsUHK824tBmHzjV0iTx3tZaiQIYDjX3SA7TsQS8CuDVqxXrRY3FaOUMgbGavesCxI9MOfFLm7Q==}
     engines: {node: '>=18'}
@@ -2090,9 +2071,6 @@ packages:
     resolution: {integrity: sha512-23XHcCF+coGYevirZceTVD7NdJOqVn+49IHyxgszm+JIiHLoB2TkmPtsYkNWT1pvRSGkc35L6NHs0yHkN2SumA==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0}
 
-  dayjs@1.11.19:
-    resolution: {integrity: sha512-t5EcLVS6QPBNqM2z8fakk/NKel+Xzshgt8FFKAn+qwlD1pzZWxh0nVCrvFK7ZDb6XucZeF9z8C7CBWTRIVApAw==}
-
   de-indent@1.0.2:
     resolution: {integrity: sha512-e/1zu3xH5MQryN2zdVaF0OrdNLUbvWxzMbi+iNA6Bky7l1RoP8a2fIbRocyHclXt/arDrrR6lL3TqFD9pMQTsg==}
 
@@ -2185,10 +2163,6 @@ packages:
   enhanced-resolve@5.18.4:
     resolution: {integrity: sha512-LgQMM4WXU3QI+SYgEc2liRgznaD5ojbmY3sb8LxyguVkIg5FxdpTkvk72te2R38/TGKxH634oLxXRGY6d7AP+Q==}
     engines: {node: '>=10.13.0'}
-
-  entities@4.5.0:
-    resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
-    engines: {node: '>=0.12'}
 
   entities@6.0.1:
     resolution: {integrity: sha512-aN97NXWF6AWBTahfVOIrB/NShkzi5H7F9r1s9mD3cDj4Ko5f2qhhVoYMibXF7GlLveb/D2ioWay8lxI97Ven3g==}
@@ -2479,15 +2453,6 @@ packages:
   flatted@3.3.3:
     resolution: {integrity: sha512-GX+ysw4PBCz0PzosHDepZGANEuFCMLrnRTiEy9McGjmkCQYwRq4A/X786G/fjM/+OjsWSU1ZrY5qyARZmO/uwg==}
 
-  floating-vue@5.2.2:
-    resolution: {integrity: sha512-afW+h2CFafo+7Y9Lvw/xsqjaQlKLdJV7h1fCHfcYQ1C4SVMlu7OAekqWgu5d4SgvkBVU0pVpLlVsrSTBURFRkg==}
-    peerDependencies:
-      '@nuxt/kit': ^3.2.0
-      vue: ^3.2.0
-    peerDependenciesMeta:
-      '@nuxt/kit':
-        optional: true
-
   focus-trap@7.8.0:
     resolution: {integrity: sha512-/yNdlIkpWbM0ptxno3ONTuf+2g318kh2ez3KSeZN5dZ8YC6AAmgeWz+GasYYiBJPFaYcSAPeu4GfhUaChzIJXA==}
 
@@ -2600,9 +2565,6 @@ packages:
 
   html-entities@2.6.0:
     resolution: {integrity: sha512-kig+rMn/QOVRvr7c86gQ8lWXq+Hkv6CbAH1hLu+RG338StTpE8Z0b44SDVaqVu7HGKf27frdmUYEs9hTUX/cLQ==}
-
-  html-to-image@1.11.13:
-    resolution: {integrity: sha512-cuOPoI7WApyhBElTTb9oqsawRvZ0rHhaHwghRLlTuffoD1B2aDemlCruLeZrUIIdvG7gs9xeELEPm6PhuASqrg==}
 
   html-void-elements@3.0.0:
     resolution: {integrity: sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==}
@@ -2860,9 +2822,6 @@ packages:
     resolution: {integrity: sha512-l51N2r93WmGUye3WuFoN5k10zyvrVs0qfKBhyC5ogUQ6Ew6JUSswh78mbSO+IU3nTWsyOArqPCcShdQSadghBQ==}
     engines: {node: '>= 12.0.0'}
 
-  linkify-it@5.0.0:
-    resolution: {integrity: sha512-5aHCbzQRADcdP+ATqnDuhhJ/MRIqDkZX5pyjFHRRysS8vZ5AbqGEoFIb6pYHPZ+L/OC2Lc+xT8uHVVR5CAK/wQ==}
-
   local-pkg@1.1.2:
     resolution: {integrity: sha512-arhlxbFRmoQHl33a0Zkle/YWlmNwoyt6QNZEIJcqNbdrsix5Lvc4HyyI3EnwxTYlZYc32EbYrQ8SzEZ7dqgg9A==}
     engines: {node: '>=14'}
@@ -2902,13 +2861,6 @@ packages:
 
   mark.js@8.11.1:
     resolution: {integrity: sha512-1I+1qpDt4idfgLQG+BNWmrqku+7/2bi5nLf4YwF8y8zXvmfiTBY3PV3ZibfrjBueCByROpuBjLLFCajqkgYoLQ==}
-
-  markdown-it-container@3.0.0:
-    resolution: {integrity: sha512-y6oKTq4BB9OQuY/KLfk/O3ysFhB3IMYoIWhGJEidXt1NQFocFK2sA2t0NYZAMyMShAGL6x5OPIbrmXPIqaN9rw==}
-
-  markdown-it@14.1.1:
-    resolution: {integrity: sha512-BuU2qnTti9YKgK5N+IeMubp14ZUKUUw7yeJbkjtosvHiP0AZ5c8IAgEMk79D0eC8F23r4Ac/q8cAIFdm2FtyoA==}
-    hasBin: true
 
   markdown-table@3.0.4:
     resolution: {integrity: sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==}
@@ -2954,9 +2906,6 @@ packages:
 
   mdn-data@2.12.2:
     resolution: {integrity: sha512-IEn+pegP1aManZuckezWCO+XZQDplx1366JoVhTpMpBB1sPey/SbveZQUosKiKiGYjg1wH4pMlNgXbCiYgihQA==}
-
-  mdurl@2.0.0:
-    resolution: {integrity: sha512-Lf+9+2r+Tdp5wXDXC4PcIBjTDtq4UKjCPMQhKIuzpJNW0b96kVqSwW0bT7FhRSfmAiFYgP+SCRvdrDozfh0U5w==}
 
   memorystream@0.3.1:
     resolution: {integrity: sha512-S3UwM3yj5mtUSEfP41UZmt/0SCoVYUcU1rkXv+BQ5Ig8ndL4sPoJNBUJERafdPb5jjHJGuMgytgKvKIf58XNBw==}
@@ -3300,10 +3249,6 @@ packages:
 
   proto-list@1.2.4:
     resolution: {integrity: sha512-vtK/94akxsTMhe0/cbfpR+syPuszcuwhqVjJq26CuNDgFGj682oRBXOP5MJpv2r7JtE8MsiepGIqvvOTBwn2vA==}
-
-  punycode.js@2.3.1:
-    resolution: {integrity: sha512-uxFIHU0YlHYhDQtV4R9J6a52SLx28BCjT+4ieh7IGbgwVJWO+km431c4yRlREUAsAmt/uMjQUyQHNEPf0M39CA==}
-    engines: {node: '>=6'}
 
   punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
@@ -3713,9 +3658,6 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  uc.micro@2.1.0:
-    resolution: {integrity: sha512-ARDJmphmdvUk6Glw7y9DQ2bFkKBHwQHLi2lsaH6PPmz/Ka9sFOBsBluozhDltWmnv9u/cF6Rt87znRTPV+yp/A==}
-
   ufo@1.6.3:
     resolution: {integrity: sha512-yDJTmhydvl5lJzBmy/hyOAA0d+aqCBuwl818haVdYCRrWV84o7YyeVm4QlVHStqNrrJSTb6jKuFAVqAFsr+K3Q==}
 
@@ -3900,6 +3842,13 @@ packages:
       yaml:
         optional: true
 
+  vitepress-demo-plugin@1.5.1:
+    resolution: {integrity: sha512-WXfbRRdbZKvmDm71Y3PaCPr3uJymwVdtBMM3Jh3iOOJXJizYY2b6hDiZKEyjEett8J2RjM8euAIbbGPmfIxO2A==}
+    peerDependencies:
+      shiki: '*'
+      vitepress: '*'
+      vue: ^3.2.0
+
   vitepress@2.0.0-alpha.16:
     resolution: {integrity: sha512-w1nwsefDVIsje7BZr2tsKxkZutDGjG0YoQ2yxO7+a9tvYVqfljYbwj5LMYkPy8Tb7YbPwa22HtIhk62jbrvuEQ==}
     hasBin: true
@@ -3960,25 +3909,6 @@ packages:
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
-
-  vue-resize@2.0.0-alpha.1:
-    resolution: {integrity: sha512-7+iqOueLU7uc9NrMfrzbG8hwMqchfVfSzpVlCMeJQe4pyibqyoifDNbKTZvwxZKDvGkB+PdFeKvnGZMoEb8esg==}
-    peerDependencies:
-      vue: ^3.0.0
-
-  vue-sonner@2.0.9:
-    resolution: {integrity: sha512-i6BokNlNDL93fpzNxN/LZSn6D6MzlO+i3qXt6iVZne3x1k7R46d5HlFB4P8tYydhgqOrRbIZEsnRd3kG7qGXyw==}
-    peerDependencies:
-      '@nuxt/kit': ^4.0.3
-      '@nuxt/schema': ^4.0.3
-      nuxt: ^4.0.3
-    peerDependenciesMeta:
-      '@nuxt/kit':
-        optional: true
-      '@nuxt/schema':
-        optional: true
-      nuxt:
-        optional: true
 
   vue-tsc@3.2.4:
     resolution: {integrity: sha512-xj3YCvSLNDKt1iF9OcImWHhmYcihVu9p4b9s4PGR/qp6yhW+tZJaypGxHScRyOrdnHvaOeF+YkZOdKwbgGvp5g==}
@@ -4605,22 +4535,6 @@ snapshots:
       levn: 0.4.1
 
   '@exodus/bytes@1.11.0': {}
-
-  '@floating-ui/core@1.7.4':
-    dependencies:
-      '@floating-ui/utils': 0.2.10
-
-  '@floating-ui/dom@1.1.1':
-    dependencies:
-      '@floating-ui/core': 1.7.4
-
-  '@floating-ui/utils@0.2.10': {}
-
-  '@flypeng/tool@5.7.5':
-    dependencies:
-      dayjs: 1.11.19
-      html-to-image: 1.11.13
-      lodash: 4.17.23
 
   '@fortawesome/fontawesome-common-types@7.1.0': {}
 
@@ -5250,30 +5164,6 @@ snapshots:
       vite: 8.0.0-beta.11(@types/node@24.10.9)(esbuild@0.27.2)(yaml@2.8.2)
       vue: 3.5.27(typescript@5.9.3)
 
-  '@vitepress-demo-preview/component@2.6.1(vitepress@2.0.0-alpha.16(@types/node@24.10.9)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2))(vue@3.5.27(typescript@5.9.3))':
-    dependencies:
-      '@vitepress-demo-preview/core': 0.3.0
-      floating-vue: 5.2.2(vue@3.5.27(typescript@5.9.3))
-      vitepress: 2.0.0-alpha.16(@types/node@24.10.9)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
-      vue: 3.5.27(typescript@5.9.3)
-      vue-sonner: 2.0.9
-    transitivePeerDependencies:
-      - '@nuxt/kit'
-      - '@nuxt/schema'
-      - nuxt
-
-  '@vitepress-demo-preview/core@0.3.0':
-    dependencies:
-      '@flypeng/tool': 5.7.5
-
-  '@vitepress-demo-preview/plugin@1.4.1(markdown-it-container@3.0.0)(vitepress@2.0.0-alpha.16(@types/node@24.10.9)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2))(vue@3.5.27(typescript@5.9.3))':
-    dependencies:
-      '@flypeng/tool': 5.7.5
-      markdown-it: 14.1.1
-      markdown-it-container: 3.0.0
-      vitepress: 2.0.0-alpha.16(@types/node@24.10.9)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
-      vue: 3.5.27(typescript@5.9.3)
-
   '@vitest/eslint-plugin@1.6.6(eslint@9.39.2)(typescript@5.9.3)(vitest@4.0.18(@types/node@24.10.9)(jsdom@28.0.0)(lightningcss@1.31.1)(yaml@2.8.2))':
     dependencies:
       '@typescript-eslint/scope-manager': 8.54.0
@@ -5796,8 +5686,6 @@ snapshots:
     transitivePeerDependencies:
       - '@noble/hashes'
 
-  dayjs@1.11.19: {}
-
   de-indent@1.0.2: {}
 
   debug@4.4.3:
@@ -5860,8 +5748,6 @@ snapshots:
     dependencies:
       graceful-fs: 4.2.11
       tapable: 2.3.0
-
-  entities@4.5.0: {}
 
   entities@6.0.1: {}
 
@@ -6237,12 +6123,6 @@ snapshots:
 
   flatted@3.3.3: {}
 
-  floating-vue@5.2.2(vue@3.5.27(typescript@5.9.3)):
-    dependencies:
-      '@floating-ui/dom': 1.1.1
-      vue: 3.5.27(typescript@5.9.3)
-      vue-resize: 2.0.0-alpha.1(vue@3.5.27(typescript@5.9.3))
-
   focus-trap@7.8.0:
     dependencies:
       tabbable: 6.4.0
@@ -6347,8 +6227,6 @@ snapshots:
       - '@noble/hashes'
 
   html-entities@2.6.0: {}
-
-  html-to-image@1.11.13: {}
 
   html-void-elements@3.0.0: {}
 
@@ -6566,10 +6444,6 @@ snapshots:
       lightningcss-win32-arm64-msvc: 1.31.1
       lightningcss-win32-x64-msvc: 1.31.1
 
-  linkify-it@5.0.0:
-    dependencies:
-      uc.micro: 2.1.0
-
   local-pkg@1.1.2:
     dependencies:
       mlly: 1.8.0
@@ -6605,17 +6479,6 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.5.5
 
   mark.js@8.11.1: {}
-
-  markdown-it-container@3.0.0: {}
-
-  markdown-it@14.1.1:
-    dependencies:
-      argparse: 2.0.1
-      entities: 4.5.0
-      linkify-it: 5.0.0
-      mdurl: 2.0.0
-      punycode.js: 2.3.1
-      uc.micro: 2.1.0
 
   markdown-table@3.0.4: {}
 
@@ -6745,8 +6608,6 @@ snapshots:
       '@types/mdast': 4.0.4
 
   mdn-data@2.12.2: {}
-
-  mdurl@2.0.0: {}
 
   memorystream@0.3.1: {}
 
@@ -7204,8 +7065,6 @@ snapshots:
 
   proto-list@1.2.4: {}
 
-  punycode.js@2.3.1: {}
-
   punycode@2.3.1: {}
 
   quansync@0.2.11: {}
@@ -7609,8 +7468,6 @@ snapshots:
 
   typescript@5.9.3: {}
 
-  uc.micro@2.1.0: {}
-
   ufo@1.6.3: {}
 
   unconfig-core@7.4.2:
@@ -7782,6 +7639,12 @@ snapshots:
       fsevents: 2.3.3
       yaml: 2.8.2
 
+  vitepress-demo-plugin@1.5.1(shiki@3.22.0)(vitepress@2.0.0-alpha.16(@types/node@24.10.9)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2))(vue@3.5.27(typescript@5.9.3)):
+    dependencies:
+      shiki: 3.22.0
+      vitepress: 2.0.0-alpha.16(@types/node@24.10.9)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
+      vue: 3.5.27(typescript@5.9.3)
+
   vitepress@2.0.0-alpha.16(@types/node@24.10.9)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2):
     dependencies:
       '@docsearch/css': 4.5.4
@@ -7883,12 +7746,6 @@ snapshots:
       semver: 7.7.3
     transitivePeerDependencies:
       - supports-color
-
-  vue-resize@2.0.0-alpha.1(vue@3.5.27(typescript@5.9.3)):
-    dependencies:
-      vue: 3.5.27(typescript@5.9.3)
-
-  vue-sonner@2.0.9: {}
 
   vue-tsc@3.2.4(typescript@5.9.3):
     dependencies:
