@@ -8,6 +8,7 @@ export default antfu(
     typescript: true,
     rules: {
       'no-console': 'off',
+      'style/quote-props': ['error', 'as-needed'],
     },
     ...oxlint.configs['flat/recommended'],
     ignores: [
