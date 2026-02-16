@@ -15,7 +15,6 @@ describe('input.vue', () => {
         prefix: 'prefix',
       },
     })
-    console.log(wrapper.html())
     // classes
     expect(wrapper.classes()).toContain('va-input--small')
     expect(wrapper.classes()).toContain('va-input--text')
@@ -55,7 +54,70 @@ describe('input.vue', () => {
     expect(wrapper.props('modelValue')).toBe('update')
     expect(input.element.value).toBe('update')
 
+    expect(wrapper.emitted()).toHaveProperty('input')
+    expect(wrapper.emitted()).toHaveProperty('change')
+
+    const inputEvent = wrapper.emitted('input')
+    const changeEvent = wrapper.emitted('change')
+    expect(inputEvent![0]).toEqual(['update'])
+    expect(changeEvent![0]).toEqual(['update'])
+
     await wrapper.setProps({ modelValue: 'pop update' })
     expect(input.element.value).toBe('pop update')
+  })
+  it('click to clear string', async () => {
+    const wrapper = mount(Input, {
+      props: {
+        type: 'text',
+        modelValue: 'test',
+        clearable: true,
+      },
+      global: {
+        stubs: ['VaIcon'],
+      },
+    })
+    expect(wrapper.find('.va-input__clear').exists()).toBeFalsy()
+    const input = wrapper.get('input')
+
+    await input.trigger('focus')
+    expect(wrapper.emitted()).toHaveProperty('focus')
+    expect(wrapper.find('.va-input__clear').exists()).toBeTruthy()
+
+    await wrapper.get('.va-input__clear').trigger('click')
+    expect(input.element.value).toBe('')
+    expect(wrapper.emitted()).toHaveProperty('clear')
+    expect(wrapper.emitted()).toHaveProperty('input')
+    expect(wrapper.emitted()).toHaveProperty('change')
+    const inputEvent = wrapper.emitted('input')
+    const changeEvent = wrapper.emitted('change')
+    expect(inputEvent![0]).toEqual([''])
+    expect(changeEvent![0]).toEqual([''])
+
+    await input.trigger('blur')
+    expect(wrapper.emitted()).toHaveProperty('blur')
+  })
+  it('show password', async () => {
+    const wrapper = mount(Input, {
+      props: {
+        modelValue: '',
+        type: 'text',
+        showPassword: true,
+      },
+      global: {
+        stubs: ['VaIcon'],
+      },
+    })
+    expect(wrapper.find('.va-input__password').exists()).toBeFalsy()
+    const input = wrapper.get('input')
+    expect(input.element.type).toBe('password')
+
+    await input.setValue('123')
+    const eyeIcon = wrapper.find('.va-input__password')
+    expect(eyeIcon.exists()).toBeTruthy()
+    expect(eyeIcon.attributes('icon')).toBe('eye-slash')
+
+    await eyeIcon.trigger('click')
+    expect(input.element.type).toBe('text')
+    expect(wrapper.find('.va-input__password').attributes('icon')).toBe('eye')
   })
 })

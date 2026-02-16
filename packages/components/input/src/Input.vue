@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { InputEmits, InputProps } from './types'
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
+import { Icon } from '../../icon'
 
 defineOptions({
   name: 'VaInput',
@@ -10,17 +11,61 @@ const props = withDefaults(defineProps<InputProps>(), {
   type: 'text',
 })
 
-const emit = defineEmits<InputEmits>()
+const emits = defineEmits<InputEmits>()
+
+const isFocus = ref(false)
 
 const innerValue = ref(props.modelValue)
 
+const showClear = computed(() =>
+  props.clearable
+  && !props.disabled
+  && !!innerValue.value
+  && isFocus.value,
+)
+
 function handleInput() {
-  emit('update:modelValue', innerValue.value)
+  emits('update:modelValue', innerValue.value)
+  emits('input', innerValue.value)
+}
+
+function handleChange() {
+  emits('change', innerValue.value)
+}
+
+function handleFocus(event: FocusEvent) {
+  isFocus.value = true
+  emits('focus', event)
+}
+
+function handleBlur(event: FocusEvent) {
+  isFocus.value = false
+  emits('blur', event)
+}
+
+function clear() {
+  innerValue.value = ''
+  emits('update:modelValue', '')
+  emits('clear')
+  emits('input', '')
+  emits('change', '')
 }
 
 watch(() => props.modelValue, (newValue) => {
   innerValue.value = newValue
 })
+
+const passwordVisible = ref(false)
+
+const showPasswordArea = computed(() =>
+  props.showPassword
+  && !props.disabled
+  && !!innerValue.value,
+)
+
+function togglePasswordVisible() {
+  passwordVisible.value = !passwordVisible.value
+}
 </script>
 
 <template>
@@ -34,6 +79,7 @@ watch(() => props.modelValue, (newValue) => {
       'is-append': $slots.append,
       'is-prefix': $slots.prefix,
       'is-suffix': $slots.suffix,
+      'is-focus': isFocus,
     }"
   >
     <!-- input -->
@@ -50,13 +96,34 @@ watch(() => props.modelValue, (newValue) => {
         <input
           v-model="innerValue"
           class="va-input__inner"
-          :type="type"
+          :type="showPassword ? (passwordVisible ? 'text' : 'password') : type"
           :disabled="disabled"
           @input="handleInput"
+          @focus="handleFocus"
+          @blur="handleBlur"
+          @change="handleChange"
         >
         <!-- suffix slot -->
-        <span v-if="$slots.suffix" class="va-input__suffix">
+        <span v-if="$slots.suffix || showClear || showPasswordArea" class="va-input__suffix">
           <slot name="suffix" />
+          <Icon
+            v-if="showClear"
+            icon="circle-xmark"
+            class="va-input__clear"
+            @click="clear"
+          />
+          <Icon
+            v-if="showPasswordArea && passwordVisible"
+            icon="eye"
+            class="va-input__password"
+            @click="togglePasswordVisible"
+          />
+          <Icon
+            v-if="showPasswordArea && !passwordVisible"
+            icon="eye-slash"
+            class="va-input__password"
+            @click="togglePasswordVisible"
+          />
         </span>
       </div>
       <!-- append slot -->
@@ -70,6 +137,9 @@ watch(() => props.modelValue, (newValue) => {
         class="va-textarea__wrapper"
         :disabled="disabled"
         @input="handleInput"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        @change="handleChange"
       />
     </template>
   </div>
