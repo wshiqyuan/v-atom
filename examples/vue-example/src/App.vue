@@ -7,8 +7,11 @@ import { Button } from '../node_modules/@v-atom/components/button'
 import { Collapse, CollapseItem } from '../node_modules/@v-atom/components/collapse'
 import { Icon } from '../node_modules/@v-atom/components/icon'
 import { Alert } from '../node_modules/@v-atom/components/alert'
+import { Input } from '../node_modules/@v-atom/components/input'
 
 const openValue = ref(['a'])
+
+const test = ref('')
 
 const menuOptions: MenuOption[] = [
   {
@@ -124,6 +127,9 @@ onMounted(() => {
         <h1>Hello</h1>
       </template>
     </Dropdown>
+
+
+    <Input type="text" v-model="test" clearable placeholder="输入字符以后可以点击清空" />
   </div>
 </template>
 

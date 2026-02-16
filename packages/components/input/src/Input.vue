@@ -1,17 +1,24 @@
 <script lang="ts" setup>
+import type { Ref } from 'vue'
 import type { InputEmits, InputProps } from './types'
-import { computed, ref, watch } from 'vue'
+import { computed, nextTick, ref, useAttrs, watch } from 'vue'
 import { Icon } from '../../icon'
 
 defineOptions({
   name: 'VaInput',
+  inheritAttrs: false,
 })
 
 const props = withDefaults(defineProps<InputProps>(), {
   type: 'text',
+  autocomplete: 'off',
 })
 
 const emits = defineEmits<InputEmits>()
+
+const attrs = useAttrs()
+
+const inputRef = ref() as Ref<HTMLInputElement>
 
 const isFocus = ref(false)
 
@@ -23,6 +30,11 @@ const showClear = computed(() =>
   && !!innerValue.value
   && isFocus.value,
 )
+
+async function keepFocus() {
+  await nextTick()
+  inputRef.value.focus()
+}
 
 function handleInput() {
   emits('update:modelValue', innerValue.value)
@@ -42,6 +54,8 @@ function handleBlur(event: FocusEvent) {
   isFocus.value = false
   emits('blur', event)
 }
+
+function NOOP() {}
 
 function clear() {
   innerValue.value = ''
@@ -66,6 +80,10 @@ const showPasswordArea = computed(() =>
 function togglePasswordVisible() {
   passwordVisible.value = !passwordVisible.value
 }
+
+defineExpose({
+  ref: inputRef,
+})
 </script>
 
 <template>
@@ -94,23 +112,35 @@ function togglePasswordVisible() {
           <slot name="prefix" />
         </span>
         <input
+          v-bind="attrs"
+          ref="inputRef"
           v-model="innerValue"
           class="va-input__inner"
           :type="showPassword ? (passwordVisible ? 'text' : 'password') : type"
           :disabled="disabled"
+          :readonly="readonly"
+          :autocomplete="autocomplete"
+          :placeholder="placeholder"
+          :autofocus="autofocus"
+          :form="form"
           @input="handleInput"
           @focus="handleFocus"
           @blur="handleBlur"
           @change="handleChange"
         >
         <!-- suffix slot -->
-        <span v-if="$slots.suffix || showClear || showPasswordArea" class="va-input__suffix">
+        <span
+          v-if="$slots.suffix || showClear || showPasswordArea"
+          class="va-input__suffix"
+          @click="keepFocus"
+        >
           <slot name="suffix" />
           <Icon
             v-if="showClear"
             icon="circle-xmark"
             class="va-input__clear"
             @click="clear"
+            @mousedown.prevent="NOOP"
           />
           <Icon
             v-if="showPasswordArea && passwordVisible"
@@ -132,10 +162,18 @@ function togglePasswordVisible() {
       </div>
     </template>
     <template v-else>
+      <!-- textarea -->
       <textarea
+        v-bind="attrs"
+        ref="inputRef"
         v-model="innerValue"
         class="va-textarea__wrapper"
         :disabled="disabled"
+        :readonly="readonly"
+        :autocomplete="autocomplete"
+        :placeholder="placeholder"
+        :autofocus="autofocus"
+        :form="form"
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
