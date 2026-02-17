@@ -1,0 +1,47 @@
+.va-switch{
+  --va-switch-on-color: var(--va-color-primary)
+  --va-switch-off-color: var(--va-border-color)
+  --va-switch-on-border-color: var(--va-color-primary)
+  --va-switch-off-border-color: var(--va-border-color)
+}
+
+.va-switch {
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  line-height: 20px;
+  height: 32px;
+  &.is-checked{
+    .va-switch__core{
+      border-color: var(--va-switch-on-border-color);
+      background-color: var(--va-switch-on-color);
+      .va-switch__core-action{
+        left: calc(100% - 17px)
+      }
+    }
+  }
+}
+
+.va-switch__core{
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  height: 20px;
+  min-width: 40px;
+  border: 1px solid var(--va-switch-off-border-color);
+  outline: none;
+  border-radius: 10px;
+  box-sizing: border-box;
+  background: var(--va-switch-off-color);
+  cursor: pointer;
+  transition: border-color var(--va-transition-duration), background-color var(--va-transition-duration);
+  .va-switch__core-action{
+    position: absolute;
+    left: 1px;
+    border-radius: var(--va-border-radius-circle);
+    width: 16px;
+    height: 16px;
+    background-color: var(--va-color-white);
+    transition: all var(--va-transition-duration);
+  }
+}
