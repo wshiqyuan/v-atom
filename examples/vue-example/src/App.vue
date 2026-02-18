@@ -8,10 +8,13 @@ import { Collapse, CollapseItem } from '../node_modules/@v-atom/components/colla
 import { Icon } from '../node_modules/@v-atom/components/icon'
 import { Alert } from '../node_modules/@v-atom/components/alert'
 import { Input } from '../node_modules/@v-atom/components/input'
+import Switch from '../node_modules/@v-atom/components/switch/src/Switch.vue'
 
 const openValue = ref(['a'])
 
 const test = ref('')
+
+const test2 = ref(false)
 
 const menuOptions: MenuOption[] = [
   {
@@ -130,6 +133,9 @@ onMounted(() => {
 
 
     <Input type="text" v-model="test" clearable placeholder="输入字符以后可以点击清空" />
+
+
+    <Switch v-model="test2" />
   </div>
 </template>
 
