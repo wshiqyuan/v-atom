@@ -1,3 +1,5 @@
+import type { VNode } from 'vue'
+
 export type SelectValueType = string | number
 
 export interface SelectOption {
@@ -11,17 +13,27 @@ export interface SelectProps {
   options: SelectOption[]
   placeholder: string
   disabled: boolean
+  clearable?: boolean
+  renderLabel?: RenderLabelFunc
+  filterable?: boolean
+  filterMethod?: CustomFilterFunc
 }
 
 export interface SelectStates {
   inputValue: string
   selectedOption: SelectOption | null
+  mouseHover: boolean
 }
+
+export type RenderLabelFunc = (option: SelectOption) => VNode
+
+export type CustomFilterFunc = (value: string) => SelectOption[]
 
 export interface SelectEmits {
   (e: 'change', value: SelectValueType): void
   (e: 'update:modelValue', value: SelectValueType): void
   (e: 'visibleChange', value: boolean): void
+  (e: 'clear'): void
 }
 
 export interface InputInstance {

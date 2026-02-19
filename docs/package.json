@@ -18,6 +18,7 @@
     "@fortawesome/free-solid-svg-icons": "catalog:components"
   },
   "devDependencies": {
+    "@vitejs/plugin-vue-jsx": "catalog:dev",
     "postcss-color-mix": "catalog:components",
     "postcss-each": "catalog:components",
     "postcss-each-variables": "catalog:components",

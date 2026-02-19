@@ -1,3 +1,4 @@
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import { defineConfig } from 'vitepress'
 import { vitepressDemoPlugin } from 'vitepress-demo-plugin'
 
@@ -9,6 +10,11 @@ export default defineConfig({
     config(md) {
       md.use(vitepressDemoPlugin)
     },
+  },
+  vite: {
+    plugins: [
+      vueJsx(),
+    ],
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config

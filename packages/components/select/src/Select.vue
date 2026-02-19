@@ -2,7 +2,9 @@
 import type { Ref } from 'vue'
 import type { TooltipInstance } from '../../tooltip/src/types'
 import type { InputInstance, SelectEmits, SelectOption, SelectProps, SelectStates, SelectValueType } from './types'
-import { reactive, ref } from 'vue'
+import { isFunction } from 'lodash-es'
+import { computed, reactive, ref, watch } from 'vue'
+import RenderVnode from '../../common/RenderVnode'
 import Icon from '../../icon/src/Icon.vue'
 import Input from '../../input/src/Input.vue'
 import Tooltip from '../../tooltip/src/Tooltip.vue'
@@ -24,6 +26,7 @@ const initialOption = findOption(props.modelValue)
 const states = reactive<SelectStates>({
   inputValue: initialOption ? initialOption.label : '',
   selectedOption: initialOption,
+  mouseHover: false,
 })
 
 const isDropdownShow = ref(false)
@@ -46,6 +49,27 @@ const popperOptions: any = {
       requires: ['computeStyles'],
     },
   ],
+}
+
+const filteredOptions = ref(props.options)
+
+watch(() => props.options, (newOptions) => {
+  filteredOptions.value = newOptions
+})
+
+function generateFilterOptions(searchValue: string) {
+  if (!props.filterable)
+    return
+  if (props.filterMethod && isFunction(props.filterMethod)) {
+    filteredOptions.value = props.filterMethod(searchValue)
+  }
+  else {
+    filteredOptions.value = props.options.filter(option => option.label.includes(searchValue))
+  }
+}
+
+function onFilter() {
+  generateFilterOptions(states.inputValue)
 }
 
 function controlDropdown(show: boolean) {
@@ -71,7 +95,7 @@ function toggleDropdown() {
 }
 
 function findOption(value: SelectValueType) {
-  const option = props.options.find(option => option.value === value)
+  const option = props.options?.find(option => option.value === value)
   return option || null
 }
 
@@ -85,6 +109,22 @@ function itemSelect(e: SelectOption) {
   controlDropdown(false)
   inputRef.value.ref.focus()
 }
+
+const showClearIcon = computed(() => {
+  return props.clearable
+    && states.mouseHover
+    && states.inputValue.trim() !== ''
+})
+
+function onClear() {
+  states.selectedOption = null
+  states.inputValue = ''
+  emits('clear')
+  emits('change', '')
+  emits('update:modelValue', '')
+}
+
+function NOOP() {}
 </script>
 
 <template>
@@ -94,6 +134,8 @@ function itemSelect(e: SelectOption) {
       'is-disabled': disabled,
     }"
     @click="toggleDropdown"
+    @mouseenter="states.mouseHover = true"
+    @mouseleave="states.mouseHover = false"
   >
     <Tooltip
       ref="tooltipRef"
@@ -107,10 +149,19 @@ function itemSelect(e: SelectOption) {
         v-model="states.inputValue"
         :disabled="disabled"
         :placeholder="placeholder"
-        readonly
+        :readonly="!filterable"
+        @input="onFilter"
       >
         <template #suffix>
           <Icon
+            v-if="showClearIcon"
+            icon="circle-xmark"
+            class="va-input__clear"
+            @mousedown.prevent="NOOP"
+            @click="onClear"
+          />
+          <Icon
+            v-else
             icon="angle-down"
             class="header-angle"
             :class="{
@@ -121,7 +172,10 @@ function itemSelect(e: SelectOption) {
       </Input>
       <template #content>
         <ul class="va-select__menu">
-          <template v-for="(item, index) in options" :key="index">
+          <template
+            v-for="(item, index) in filteredOptions"
+            :key="index"
+          >
             <li
               :id="`select-item-${item.value}`"
               class="va-select__menu-item"
@@ -131,7 +185,7 @@ function itemSelect(e: SelectOption) {
               }"
               @click.stop="itemSelect(item)"
             >
-              {{ item.label }}
+              <RenderVnode :vnode="renderLabel ? renderLabel(item) : item.label" />
             </li>
           </template>
         </ul>
