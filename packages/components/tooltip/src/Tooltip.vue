@@ -80,6 +80,9 @@ useClickOutside(popperContainerNode, () => {
   if (props.trigger === 'click' && isOpen.value && !props.manual) {
     closePopper()
   }
+  if (isOpen.value) {
+    emits('clickOutside', true)
+  }
 })
 
 function activeEvents() {

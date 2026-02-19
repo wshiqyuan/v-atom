@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import type { Ref } from 'vue'
 import type { TooltipInstance } from '../../tooltip/src/types'
-import type { SelectEmits, SelectOption, SelectProps, SelectStates } from './types'
+import type { InputInstance, SelectEmits, SelectOption, SelectProps, SelectStates, SelectValueType } from './types'
 import { reactive, ref } from 'vue'
+import Icon from '../../icon/src/Icon.vue'
 import Input from '../../input/src/Input.vue'
 import Tooltip from '../../tooltip/src/Tooltip.vue'
 
@@ -15,6 +16,8 @@ const props = defineProps<SelectProps>()
 const emits = defineEmits<SelectEmits>()
 
 const tooltipRef = ref() as Ref<TooltipInstance>
+
+const inputRef = ref() as Ref<InputInstance>
 
 const initialOption = findOption(props.modelValue)
 
@@ -67,7 +70,7 @@ function toggleDropdown() {
   }
 }
 
-function findOption(value: string) {
+function findOption(value: SelectValueType) {
   const option = props.options.find(option => option.value === value)
   return option || null
 }
@@ -80,6 +83,7 @@ function itemSelect(e: SelectOption) {
   emits('change', e.value)
   emits('update:modelValue', e.value)
   controlDropdown(false)
+  inputRef.value.ref.focus()
 }
 </script>
 
@@ -96,12 +100,25 @@ function itemSelect(e: SelectOption) {
       placement="bottom-start"
       :popper-options="popperOptions"
       manual
+      @click-outside="controlDropdown(false)"
     >
       <Input
+        ref="inputRef"
         v-model="states.inputValue"
         :disabled="disabled"
         :placeholder="placeholder"
-      />
+        readonly
+      >
+        <template #suffix>
+          <Icon
+            icon="angle-down"
+            class="header-angle"
+            :class="{
+              'is-active': isDropdownShow,
+            }"
+          />
+        </template>
+      </Input>
       <template #content>
         <ul class="va-select__menu">
           <template v-for="(item, index) in options" :key="index">

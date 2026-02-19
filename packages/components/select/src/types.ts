@@ -1,11 +1,13 @@
+export type SelectValueType = string | number
+
 export interface SelectOption {
   label: string
-  value: string
+  value: SelectValueType
   disabled?: boolean
 }
 
 export interface SelectProps {
-  modelValue: string
+  modelValue: SelectValueType
   options: SelectOption[]
   placeholder: string
   disabled: boolean
@@ -17,7 +19,11 @@ export interface SelectStates {
 }
 
 export interface SelectEmits {
-  (e: 'change', value: string): void
-  (e: 'update:modelValue', value: string): void
+  (e: 'change', value: SelectValueType): void
+  (e: 'update:modelValue', value: SelectValueType): void
   (e: 'visibleChange', value: boolean): void
+}
+
+export interface InputInstance {
+  ref: HTMLInputElement | HTMLTextAreaElement
 }
