@@ -33,6 +33,7 @@ const states = reactive<SelectStates>({
   selectedOption: initialOption,
   mouseHover: false,
   loading: false,
+  highlightIndex: -1,
 })
 
 const isDropdownShow = ref(false)
@@ -85,6 +86,7 @@ async function generateFilterOptions(searchValue: string) {
   else {
     filteredOptions.value = props.options.filter(option => option.label.includes(searchValue))
   }
+  states.highlightIndex = -1
 }
 
 function onFilter() {
@@ -116,6 +118,7 @@ function controlDropdown(show: boolean) {
     if (props.filterable) {
       states.inputValue = states.selectedOption ? states.selectedOption.label : ''
     }
+    states.highlightIndex = -1
   }
   isDropdownShow.value = show
   emits('visibleChange', show)
@@ -146,6 +149,53 @@ function itemSelect(e: SelectOption) {
   emits('update:modelValue', e.value)
   controlDropdown(false)
   inputRef.value.ref.focus()
+}
+
+function handleKeydown(e: KeyboardEvent) {
+  switch (e.key) {
+    case 'Enter':
+      if (!isDropdownShow.value) {
+        controlDropdown(true)
+      }
+      else {
+        if (states.highlightIndex > -1 && filteredOptions.value[states.highlightIndex]) {
+          itemSelect(filteredOptions.value[states.highlightIndex])
+        }
+        else {
+          controlDropdown(false)
+        }
+      }
+      break
+    case 'Escape':
+      if (isDropdownShow.value) {
+        controlDropdown(false)
+      }
+      break
+    case 'ArrowUp':
+      e.preventDefault()
+      if (filteredOptions.value.length > 0) {
+        if (states.highlightIndex <= 0) {
+          states.highlightIndex = filteredOptions.value.length - 1
+        }
+        else {
+          states.highlightIndex--
+        }
+      }
+      break
+    case 'ArrowDown':
+      e.preventDefault()
+      if (filteredOptions.value.length > 0) {
+        if (states.highlightIndex < 0 || states.highlightIndex > filteredOptions.value.length - 1) {
+          states.highlightIndex = 0
+        }
+        else {
+          states.highlightIndex++
+        }
+      }
+      break
+    default:
+      break
+  }
 }
 
 const showClearIcon = computed(() => {
@@ -189,6 +239,7 @@ function NOOP() {}
         :placeholder="filterPlaceholder"
         :readonly="!filterable || !isDropdownShow"
         @input="debounceOnFilter"
+        @keydown="handleKeydown"
       >
         <template #suffix>
           <Icon
@@ -235,6 +286,7 @@ function NOOP() {}
               :class="{
                 'is-disabled': item.disabled,
                 'is-selected': states.selectedOption?.value === item.value,
+                'is-highlighted': states.highlightIndex === index,
               }"
               @click.stop="itemSelect(item)"
             >
