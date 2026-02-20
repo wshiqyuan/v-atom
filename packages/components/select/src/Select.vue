@@ -2,7 +2,7 @@
 import type { Ref } from 'vue'
 import type { TooltipInstance } from '../../tooltip/src/types'
 import type { InputInstance, SelectEmits, SelectOption, SelectProps, SelectStates, SelectValueType } from './types'
-import { isFunction } from 'lodash-es'
+import { debounce, isFunction } from 'lodash-es'
 import { computed, reactive, ref, watch } from 'vue'
 import RenderVnode from '../../common/RenderVnode'
 import Icon from '../../icon/src/Icon.vue'
@@ -13,9 +13,14 @@ defineOptions({
   name: 'VaSelect',
 })
 
-const props = defineProps<SelectProps>()
+const props = withDefaults(defineProps<SelectProps>(), {
+  options: () => [],
+
+})
 
 const emits = defineEmits<SelectEmits>()
+
+const timeout = computed(() => props.remote ? 300 : 0)
 
 const tooltipRef = ref() as Ref<TooltipInstance>
 
@@ -27,6 +32,7 @@ const states = reactive<SelectStates>({
   inputValue: initialOption ? initialOption.label : '',
   selectedOption: initialOption,
   mouseHover: false,
+  loading: false,
 })
 
 const isDropdownShow = ref(false)
@@ -57,11 +63,24 @@ watch(() => props.options, (newOptions) => {
   filteredOptions.value = newOptions
 })
 
-function generateFilterOptions(searchValue: string) {
+async function generateFilterOptions(searchValue: string) {
   if (!props.filterable)
     return
   if (props.filterMethod && isFunction(props.filterMethod)) {
     filteredOptions.value = props.filterMethod(searchValue)
+  }
+  else if (props.remote && props.remoteMethod && isFunction(props.remoteMethod)) {
+    states.loading = true
+    try {
+      filteredOptions.value = await props.remoteMethod(searchValue)
+    }
+    catch (e) {
+      console.error(e)
+      filteredOptions.value = []
+    }
+    finally {
+      states.loading = false
+    }
   }
   else {
     filteredOptions.value = props.options.filter(option => option.label.includes(searchValue))
@@ -72,12 +91,31 @@ function onFilter() {
   generateFilterOptions(states.inputValue)
 }
 
+const debounceOnFilter = debounce(() => {
+  onFilter()
+}, timeout.value)
+
+const filterPlaceholder = computed(() => {
+  return (props.filterable && states.selectedOption && isDropdownShow.value)
+    ? states.selectedOption.label
+    : props.placeholder
+})
+
 function controlDropdown(show: boolean) {
   if (show) {
+    if (props.filterable && states.selectedOption) {
+      states.inputValue = ''
+    }
+    if (props.filterable) {
+      generateFilterOptions(states.inputValue)
+    }
     tooltipRef.value.show()
   }
   else {
     tooltipRef.value.hide()
+    if (props.filterable) {
+      states.inputValue = states.selectedOption ? states.selectedOption.label : ''
+    }
   }
   isDropdownShow.value = show
   emits('visibleChange', show)
@@ -148,9 +186,9 @@ function NOOP() {}
         ref="inputRef"
         v-model="states.inputValue"
         :disabled="disabled"
-        :placeholder="placeholder"
-        :readonly="!filterable"
-        @input="onFilter"
+        :placeholder="filterPlaceholder"
+        :readonly="!filterable || !isDropdownShow"
+        @input="debounceOnFilter"
       >
         <template #suffix>
           <Icon
@@ -171,7 +209,22 @@ function NOOP() {}
         </template>
       </Input>
       <template #content>
-        <ul class="va-select__menu">
+        <div
+          v-if="states.loading"
+          class="va-select__loading"
+        >
+          <Icon icon="spinner" spin />
+        </div>
+        <div
+          v-else-if="filteredOptions.length === 0 && filterable"
+          class="va-select__nodata"
+        >
+          <span>No matching Data</span>
+        </div>
+        <ul
+          v-else
+          class="va-select__menu"
+        >
           <template
             v-for="(item, index) in filteredOptions"
             :key="index"

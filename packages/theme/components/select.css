@@ -18,6 +18,7 @@
     box-shadow: 0 0 0 1px var(--va-select-input-focus-border-color) inset!important
   }
   .va-input {
+    user-select: none;
     .header-angle {
       transition: transform var(--va-transition-duration);
       &.is-active {
@@ -72,6 +73,5 @@
         background-color: transparent;
       }
     }
-
   }
 }
