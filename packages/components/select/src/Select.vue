@@ -15,7 +15,6 @@ defineOptions({
 
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
-
 })
 
 const emits = defineEmits<SelectEmits>()
@@ -34,6 +33,11 @@ const states = reactive<SelectStates>({
   mouseHover: false,
   loading: false,
   highlightIndex: -1,
+})
+
+watch([() => props.modelValue, () => props.options], ([newValue]) => {
+  const newInitialOption = findOption(newValue)
+  states.inputValue = newInitialOption ? newInitialOption.label : ''
 })
 
 const isDropdownShow = ref(false)
