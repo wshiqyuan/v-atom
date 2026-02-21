@@ -1,3 +1,4 @@
+import type { Plugin } from 'vitepress'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { defineConfig } from 'vitepress'
 import { vitepressDemoPlugin } from 'vitepress-demo-plugin'
@@ -13,7 +14,7 @@ export default defineConfig({
   },
   vite: {
     plugins: [
-      vueJsx(),
+      vueJsx() as Plugin,
     ],
   },
   themeConfig: {
@@ -38,6 +39,12 @@ export default defineConfig({
           { text: 'Input 输入框', link: '/components/input' },
           { text: 'Switch 开关', link: '/components/switch' },
           { text: 'Select 选择器', link: '/components/select' },
+        ],
+      },
+      {
+        text: 'Form 表单组件',
+        items: [
+          { text: 'Form 表单', link: '/components/form' },
         ],
       },
     ],

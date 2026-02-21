@@ -172,10 +172,10 @@ importers:
         version: 7.0.2(postcss@8.5.6)
       vitepress:
         specifier: catalog:docs
-        version: 2.0.0-alpha.16(@types/node@24.10.9)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
+        version: 2.0.0-alpha.16(@types/node@24.10.9)(async-validator@4.2.5)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
       vitepress-demo-plugin:
         specifier: catalog:docs
-        version: 1.5.1(shiki@3.22.0)(vitepress@2.0.0-alpha.16(@types/node@24.10.9)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2))(vue@3.5.27(typescript@5.9.3))
+        version: 1.5.1(shiki@3.22.0)(vitepress@2.0.0-alpha.16(@types/node@24.10.9)(async-validator@4.2.5)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2))(vue@3.5.27(typescript@5.9.3))
       vue:
         specifier: catalog:dev
         version: 3.5.27(typescript@5.9.3)
@@ -258,6 +258,9 @@ importers:
       '@v-atom/utils':
         specifier: workspace:*
         version: link:../utils
+      async-validator:
+        specifier: ^4.2.5
+        version: 4.2.5
       lodash-es:
         specifier: catalog:dep
         version: 4.17.23
@@ -1896,6 +1899,9 @@ packages:
   ast-kit@3.0.0-beta.1:
     resolution: {integrity: sha512-trmleAnZ2PxN/loHWVhhx1qeOHSRXq4TDsBBxq3GqeJitfk3+jTQ+v/C1km/KYq9M7wKqCewMh+/NAvVH7m+bw==}
     engines: {node: '>=20.19.0'}
+
+  async-validator@4.2.5:
+    resolution: {integrity: sha512-7HhHjtERjqlNbZtqNqy2rckN/SpOOlmDliet+lP7k+eKZEjPk3DgyeU9lIXLdeLz0uBbbVp+9Qdow9wJWgwwfg==}
 
   balanced-match@0.2.1:
     resolution: {integrity: sha512-euSOvfze1jPOf85KQOmZ2UcWDJ/dUJukTJdj4o9ZZLyjl7IjdIyE4fAQRSuGrxAjB9nvvvrl4N3bPtRq+W+SyQ==}
@@ -5430,12 +5436,13 @@ snapshots:
       '@vueuse/shared': 14.2.1(vue@3.5.27(typescript@5.9.3))
       vue: 3.5.27(typescript@5.9.3)
 
-  '@vueuse/integrations@14.2.1(change-case@5.4.4)(focus-trap@7.8.0)(vue@3.5.27(typescript@5.9.3))':
+  '@vueuse/integrations@14.2.1(async-validator@4.2.5)(change-case@5.4.4)(focus-trap@7.8.0)(vue@3.5.27(typescript@5.9.3))':
     dependencies:
       '@vueuse/core': 14.2.1(vue@3.5.27(typescript@5.9.3))
       '@vueuse/shared': 14.2.1(vue@3.5.27(typescript@5.9.3))
       vue: 3.5.27(typescript@5.9.3)
     optionalDependencies:
+      async-validator: 4.2.5
       change-case: 5.4.4
       focus-trap: 7.8.0
 
@@ -5523,6 +5530,8 @@ snapshots:
       '@babel/parser': 8.0.0-beta.4
       estree-walker: 3.0.3
       pathe: 2.0.3
+
+  async-validator@4.2.5: {}
 
   balanced-match@0.2.1: {}
 
@@ -7642,13 +7651,13 @@ snapshots:
       fsevents: 2.3.3
       yaml: 2.8.2
 
-  vitepress-demo-plugin@1.5.1(shiki@3.22.0)(vitepress@2.0.0-alpha.16(@types/node@24.10.9)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2))(vue@3.5.27(typescript@5.9.3)):
+  vitepress-demo-plugin@1.5.1(shiki@3.22.0)(vitepress@2.0.0-alpha.16(@types/node@24.10.9)(async-validator@4.2.5)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2))(vue@3.5.27(typescript@5.9.3)):
     dependencies:
       shiki: 3.22.0
-      vitepress: 2.0.0-alpha.16(@types/node@24.10.9)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
+      vitepress: 2.0.0-alpha.16(@types/node@24.10.9)(async-validator@4.2.5)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2)
       vue: 3.5.27(typescript@5.9.3)
 
-  vitepress@2.0.0-alpha.16(@types/node@24.10.9)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2):
+  vitepress@2.0.0-alpha.16(@types/node@24.10.9)(async-validator@4.2.5)(change-case@5.4.4)(lightningcss@1.31.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.2):
     dependencies:
       '@docsearch/css': 4.5.4
       '@docsearch/js': 4.5.4
@@ -7662,7 +7671,7 @@ snapshots:
       '@vue/devtools-api': 8.0.6
       '@vue/shared': 3.5.27
       '@vueuse/core': 14.2.1(vue@3.5.27(typescript@5.9.3))
-      '@vueuse/integrations': 14.2.1(change-case@5.4.4)(focus-trap@7.8.0)(vue@3.5.27(typescript@5.9.3))
+      '@vueuse/integrations': 14.2.1(async-validator@4.2.5)(change-case@5.4.4)(focus-trap@7.8.0)(vue@3.5.27(typescript@5.9.3))
       focus-trap: 7.8.0
       mark.js: 8.11.1
       minisearch: 7.2.0
