@@ -28,7 +28,7 @@ const innerValue = ref(props.modelValue)
 const formItemContext = inject(formItemContextKey)
 
 function runValidation(trigger?: string) {
-  formItemContext?.validate(trigger)
+  formItemContext?.validate(trigger).catch(e => console.log(e.errors))
 }
 
 const showClear = computed(() =>

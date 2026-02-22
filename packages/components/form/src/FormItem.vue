@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { FormItemContext, FormItemProps, FormValidateFailure } from './types'
+import type { FormItemContext, FormItemInstance, FormItemProps, FormValidateFailure, ValidateStatusProp } from './types'
 import Schema from 'async-validator'
 import { isNil } from 'lodash-es'
 import { computed, inject, onMounted, onUnmounted, provide, reactive } from 'vue'
@@ -15,7 +15,7 @@ const formContext = inject(formContextKey)
 
 let initialValue: Record<string, any>
 
-const validateStatus = reactive({
+const validateStatus: ValidateStatusProp = reactive({
   state: 'init',
   errorMsg: '',
   loading: false,
@@ -53,7 +53,11 @@ function getTriggerRules(trigger?: string) {
   })
 }
 
-function validate(trigger?: string) {
+const isRequired = computed(() => {
+  return itemRules.value.some(rule => rule.required)
+})
+
+async function validate(trigger?: string) {
   const modelName = props.prop
   const triggeredRules = getTriggerRules(trigger)
   if (triggeredRules.length === 0) {
@@ -113,6 +117,13 @@ onMounted(() => {
 onUnmounted(() => {
   formContext?.removeField(context)
 })
+
+defineExpose<FormItemInstance>({
+  validateStatus,
+  validate,
+  resetField,
+  clearValidate,
+})
 </script>
 
 <template>
@@ -122,6 +133,7 @@ onUnmounted(() => {
       'is-error': validateStatus.state === 'error',
       'is-success': validateStatus.state === 'success',
       'is-loading': validateStatus.loading,
+      'is-required': isRequired,
     }"
   >
     <label class="va-form-item__label">

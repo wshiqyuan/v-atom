@@ -23,6 +23,11 @@
   line-height: var(--va-input-height);
   box-sizing: border-box;
   vertical-align: middle;
+  &.is-focus {
+    .va-input__wrapper {
+      box-shadow: 0 0 0 1px var(--va-input-focus-border-color) inset;
+    }
+  }
   &.is-disabled {
     cursor: not-allowed;
     .va-input__wrapper {
@@ -179,9 +184,6 @@
   box-shadow: 0 0 0 1px var(--va-input-border-color, var(--va-border-color)) inset;
   &:hover {
     box-shadow: 0 0 0 1px var(--va-input-hover-border-color) inset;
-  }
-  &.is-focus {
-    box-shadow: 0 0 0 1px var(--va-input-focus-border-color) inset;
   }
   .va-input__inner {
     --va-input-inner-height: calc(var(--va-input-height, 32px) - 2px);

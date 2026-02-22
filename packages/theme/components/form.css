@@ -1,0 +1,54 @@
+.va-form {
+  --va-form-label-font-size: var(--va-form-size-base);
+  --va-form-content-font-size: var(--va-font-size-base);
+}
+
+.va-form-item {
+  display: flex;
+  margin-bottom: 18px;
+  .va-form-item__label {
+    width: 150px;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 12px 0 0;
+    box-sizing: border-box;
+    display: inline-flex;
+    justify-content: flex-end;
+    font-size: var(--va-form-label-font-size);
+    color: var(--va-text-color-regular);
+  }
+
+  .va-form-item__content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex: 1;
+    line-height: 32px;
+    font-size: var(--va-form-content-font-size);
+    min-width: 0;
+    position: relative;
+  }
+  .va-form-item__error-msg {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding-top: 2px;
+    color: var(--va-color-danger);
+    font-size: 12px;
+    line-height: 1;
+  }  
+}
+
+.va-form-item.is-error .va-input__wrapper { 
+  box-shadow: 0 0 0 1px var(--va-color-danger) inset;
+}
+
+.va-form-item.is-success .va-input__wrapper {
+  box-shadow: 0 0 0 1px var(--va-color-success) inset;
+}
+
+.va-form-item.is-required > .va-form-item__label::before {
+  content: '*';
+  color: var(--va-color-danger);
+  margin-right: 4px;
+}

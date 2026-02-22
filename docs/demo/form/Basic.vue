@@ -9,9 +9,9 @@ import Input from '../../../packages/components/input/src/Input.vue'
 const formRef = ref()
 
 const model = reactive({
-  email: '',
+  email: '123',
   password: '',
-  test: '',
+  confirmPwd: '',
 })
 const rules = {
   email: [
@@ -21,8 +21,9 @@ const rules = {
   password: [
     { type: 'string', required: true, trigger: 'blur' },
   ],
-  test: [
+  confirmPwd: [
     { type: 'string', required: true, trigger: 'blur' },
+    { validator: (rule, value) => value === model.password, trigger: 'blur', message: '密码不一致' },
   ],
 }
 
@@ -48,19 +49,12 @@ function reset() {
       <Input v-model="model.email" />
     </FormItem>
     <FormItem label="the password" prop="password">
-      <template #label="{ label }">
-        <Button>
-          {{ label }}
-        </Button>
-      </template>
       <Input v-model="model.password" type="password" />
     </FormItem>
-    <FormItem label="test value" prop="test">
-      <template #default="{ validate }">
-        <input v-model="model.test" type="text" @blur="validate">
-      </template>
+    <FormItem label="confirm password" prop="confirmPwd">
+      <Input v-model="model.confirmPwd" type="password" />
     </FormItem>
-    <div>
+    <div :style="{ textAlign: 'center' }">
       <Button type="primary" @click.prevent="submit">
         Submit
       </Button>
