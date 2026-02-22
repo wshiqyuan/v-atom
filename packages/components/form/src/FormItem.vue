@@ -13,6 +13,8 @@ const props = defineProps<FormItemProps>()
 
 const formContext = inject(formContextKey)
 
+let initialValue: Record<string, any>
+
 const validateStatus = reactive({
   state: 'init',
   errorMsg: '',
@@ -62,7 +64,7 @@ function validate(trigger?: string) {
       [modelName]: triggeredRules,
     })
     validateStatus.loading = true
-    validator.validate({ [modelName]: innerValue.value })
+    return validator.validate({ [modelName]: innerValue.value })
       .then(() => {
         validateStatus.state = 'success'
       })
@@ -70,6 +72,7 @@ function validate(trigger?: string) {
         const { errors } = e
         validateStatus.state = 'error'
         validateStatus.errorMsg = (errors && errors.length > 0) ? errors[0].message || '' : ''
+        return Promise.reject(e)
       })
       .finally(() => {
         validateStatus.loading = false
@@ -77,9 +80,25 @@ function validate(trigger?: string) {
   }
 }
 
+function clearValidate() {
+  validateStatus.state = 'init'
+  validateStatus.errorMsg = ''
+  validateStatus.loading = false
+}
+
+function resetField() {
+  clearValidate()
+  const model = formContext?.model
+  if (model && props.prop && !isNil(model[props.prop])) {
+    model[props.prop] = initialValue
+  }
+}
+
 const context: FormItemContext = {
   prop: props.prop || '',
   validate,
+  clearValidate,
+  resetField,
 }
 
 provide(formItemContextKey, context)
@@ -87,6 +106,7 @@ provide(formItemContextKey, context)
 onMounted(() => {
   if (props.prop) {
     formContext?.addField(context)
+    initialValue = innerValue.value
   }
 })
 

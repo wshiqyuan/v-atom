@@ -1,10 +1,12 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 
 import Button from '../../../packages/components/button/src/Button.vue'
 import Form from '../../../packages/components/form/src/Form.vue'
 import FormItem from '../../../packages/components/form/src/FormItem.vue'
 import Input from '../../../packages/components/input/src/Input.vue'
+
+const formRef = ref()
 
 const model = reactive({
   email: '',
@@ -23,10 +25,25 @@ const rules = {
     { type: 'string', required: true, trigger: 'blur' },
   ],
 }
+
+async function submit() {
+  try {
+    await formRef.value.validate()
+    console.log('passed')
+  }
+  catch (e) {
+    console.log(e)
+  }
+}
+
+function reset() {
+  formRef.value.clearValidate()
+  formRef.value.resetFields()
+}
 </script>
 
 <template>
-  <Form :model="model" :rules="rules">
+  <Form ref="formRef" :model="model" :rules="rules">
     <FormItem label="the email" prop="email">
       <Input v-model="model.email" />
     </FormItem>
@@ -44,10 +61,12 @@ const rules = {
       </template>
     </FormItem>
     <div>
-      <Button type="primary">
+      <Button type="primary" @click.prevent="submit">
         Submit
       </Button>
-      <Button>Reset</Button>
+      <Button @click.prevent="reset">
+        Reset
+      </Button>
     </div>
   </Form>
   <div>
