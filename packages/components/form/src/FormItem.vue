@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { FormItemProps, FormValidateFailure } from './types'
+import type { FormItemContext, FormItemProps, FormValidateFailure } from './types'
 import Schema from 'async-validator'
 import { isNil } from 'lodash-es'
-import { computed, inject, reactive } from 'vue'
-import { formContextKey } from './types'
+import { computed, inject, onMounted, onUnmounted, provide, reactive } from 'vue'
+import { formContextKey, formItemContextKey } from './types'
 
 defineOptions({
   name: 'VaFormItem',
@@ -39,11 +39,27 @@ const itemRules = computed(() => {
   }
 })
 
-function validate() {
+function getTriggerRules(trigger?: string) {
+  const rules = itemRules.value
+  if (!rules) {
+    return []
+  }
+  return rules.filter((rule) => {
+    if (!rule.trigger || !trigger)
+      return true
+    return rule.trigger && rule.trigger === trigger
+  })
+}
+
+function validate(trigger?: string) {
   const modelName = props.prop
+  const triggeredRules = getTriggerRules(trigger)
+  if (triggeredRules.length === 0) {
+    return true
+  }
   if (modelName) {
     const validator = new Schema({
-      [modelName]: itemRules.value,
+      [modelName]: triggeredRules,
     })
     validateStatus.loading = true
     validator.validate({ [modelName]: innerValue.value })
@@ -60,6 +76,23 @@ function validate() {
       })
   }
 }
+
+const context: FormItemContext = {
+  prop: props.prop || '',
+  validate,
+}
+
+provide(formItemContextKey, context)
+
+onMounted(() => {
+  if (props.prop) {
+    formContext?.addField(context)
+  }
+})
+
+onUnmounted(() => {
+  formContext?.removeField(context)
+})
 </script>
 
 <template>
@@ -77,7 +110,7 @@ function validate() {
       </slot>
     </label>
     <div class="va-form-item__content">
-      <slot />
+      <slot :validate="validate" />
       <div
         v-if="validateStatus.state === 'error'"
         class="va-form-item__error-msg"
@@ -85,8 +118,5 @@ function validate() {
         {{ validateStatus.errorMsg }}
       </div>
     </div>
-    <button @click.prevent="validate">
-      Validate
-    </button>
   </div>
 </template>

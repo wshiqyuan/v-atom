@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import type { Ref } from 'vue'
 import type { InputEmits, InputProps } from './types'
-import { computed, nextTick, ref, useAttrs, watch } from 'vue'
+import { computed, inject, nextTick, ref, useAttrs, watch } from 'vue'
+import { formItemContextKey } from '../../form/src/types'
 import { Icon } from '../../icon'
 
 defineOptions({
@@ -24,6 +25,12 @@ const isFocus = ref(false)
 
 const innerValue = ref(props.modelValue)
 
+const formItemContext = inject(formItemContextKey)
+
+function runValidation(trigger?: string) {
+  formItemContext?.validate(trigger)
+}
+
 const showClear = computed(() =>
   props.clearable
   && !props.disabled
@@ -39,10 +46,12 @@ async function keepFocus() {
 function handleInput() {
   emits('update:modelValue', innerValue.value)
   emits('input', innerValue.value)
+  runValidation('input')
 }
 
 function handleChange() {
   emits('change', innerValue.value)
+  runValidation('change')
 }
 
 function handleFocus(event: FocusEvent) {
@@ -53,6 +62,7 @@ function handleFocus(event: FocusEvent) {
 function handleBlur(event: FocusEvent) {
   isFocus.value = false
   emits('blur', event)
+  runValidation('blur')
 }
 
 function NOOP() {}

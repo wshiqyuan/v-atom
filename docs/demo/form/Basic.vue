@@ -9,12 +9,17 @@ import Input from '../../../packages/components/input/src/Input.vue'
 const model = reactive({
   email: '',
   password: '',
+  test: '',
 })
 const rules = {
   email: [
     { type: 'email', required: true, trigger: 'blur' },
+    { type: 'string', required: true, trigger: 'input' },
   ],
   password: [
+    { type: 'string', required: true, trigger: 'blur' },
+  ],
+  test: [
     { type: 'string', required: true, trigger: 'blur' },
   ],
 }
@@ -32,6 +37,11 @@ const rules = {
         </Button>
       </template>
       <Input v-model="model.password" type="password" />
+    </FormItem>
+    <FormItem label="test value" prop="test">
+      <template #default="{ validate }">
+        <input v-model="model.test" type="text" @blur="validate">
+      </template>
     </FormItem>
     <div>
       <Button type="primary">
