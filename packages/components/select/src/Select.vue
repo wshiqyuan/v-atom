@@ -3,8 +3,9 @@ import type { Ref } from 'vue'
 import type { TooltipInstance } from '../../tooltip/src/types'
 import type { InputInstance, SelectEmits, SelectOption, SelectProps, SelectStates, SelectValueType } from './types'
 import { debounce, isFunction } from 'lodash-es'
-import { computed, reactive, ref, watch } from 'vue'
+import { computed, inject, reactive, ref, watch } from 'vue'
 import RenderVnode from '../../common/RenderVnode'
+import { formItemContextKey } from '../../form/src/types'
 import Icon from '../../icon/src/Icon.vue'
 import Input from '../../input/src/Input.vue'
 import Tooltip from '../../tooltip/src/Tooltip.vue'
@@ -26,6 +27,12 @@ const tooltipRef = ref() as Ref<TooltipInstance>
 const inputRef = ref() as Ref<InputInstance>
 
 const initialOption = findOption(props.modelValue)
+
+const formItemContext = inject(formItemContextKey)
+
+function runValidation(trigger?: string) {
+  formItemContext?.validate(trigger).catch(e => console.log(e.errors))
+}
 
 const states = reactive<SelectStates>({
   inputValue: initialOption ? initialOption.label : '',
@@ -217,6 +224,18 @@ function onClear() {
 }
 
 function NOOP() {}
+
+function handleChange() {
+  runValidation('change')
+}
+
+function handleBlur() {
+  runValidation('blur')
+}
+
+function handleFocus() {
+  runValidation('focus')
+}
 </script>
 
 <template>
@@ -244,6 +263,9 @@ function NOOP() {}
         :readonly="!filterable || !isDropdownShow"
         @input="debounceOnFilter"
         @keydown="handleKeydown"
+        @change="handleChange"
+        @blur="handleBlur"
+        @focus="handleFocus"
       >
         <template #suffix>
           <Icon
