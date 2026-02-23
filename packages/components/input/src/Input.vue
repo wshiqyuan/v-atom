@@ -3,7 +3,7 @@ import type { Ref } from 'vue'
 import type { InputEmits, InputProps } from './types'
 import { computed, inject, nextTick, ref, useAttrs, watch } from 'vue'
 import { formItemContextKey } from '../../form/src/types'
-import { Icon } from '../../icon'
+import Icon from '../../icon/src/Icon.vue'
 
 defineOptions({
   name: 'VaInput',

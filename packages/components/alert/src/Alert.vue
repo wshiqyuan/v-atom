@@ -2,7 +2,7 @@
 import type { Slots } from 'vue'
 import type { AlertEmits, AlertInstance, AlertProps } from './types'
 import { ref, useSlots } from 'vue'
-import { Icon } from '../../icon'
+import Icon from '../../icon/src/Icon.vue'
 import { IconTypeMap } from './types'
 
 defineOptions({

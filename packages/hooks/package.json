@@ -1,14 +1,7 @@
 {
   "name": "@v-atom/hooks",
   "version": "0.0.1",
-  "description": "hooks library for atom",
-  "license": "MIT",
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
-  "files": [
-    "dist/**"
-  ],
+  "description": "hooks library for v-atom",
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch"

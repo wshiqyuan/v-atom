@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { CollapseItemProps } from './types'
 import { computed, inject } from 'vue'
-import { Icon } from '../../icon'
+import Icon from '../../icon/src/Icon.vue'
 import { collapseContextKey } from './types'
 
 defineOptions({

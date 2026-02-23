@@ -1,16 +1,19 @@
-/// <reference types="vitest/config" />
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@v-atom/components': '../../packages/components',
+    },
+  },
   plugins: [
     vue(),
     vueJsx(),
     dts({
       root: '.',
-      tsconfigPath: './tsconfig.json',
       outDir: 'dist/types',
       exclude: ['**/__tests__/'],
     }),
@@ -18,6 +21,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: './index.ts',
+      name: 'VAtom',
       fileName: 'v-atom',
       formats: ['es'],
     },
@@ -32,9 +36,5 @@ export default defineConfig({
     sourcemap: true,
     minify: 'esbuild',
     emptyOutDir: true,
-  },
-  test: {
-    environment: 'jsdom',
-    globals: true,
   },
 })

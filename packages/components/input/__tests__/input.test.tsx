@@ -104,7 +104,7 @@ describe('input.vue', () => {
         showPassword: true,
       },
       global: {
-        stubs: ['VaIcon'],
+        stubs: ['Icon'],
       },
     })
     expect(wrapper.find('.va-input__password').exists()).toBeFalsy()

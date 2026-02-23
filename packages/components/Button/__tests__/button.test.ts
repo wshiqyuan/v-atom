@@ -58,7 +58,7 @@ describe('button.vue', () => {
         default: 'loading',
       },
       global: {
-        stubs: ['VaIcon'],
+        stubs: ['Icon'],
       },
     })
     const iconElement = wrapper.findComponent(VaIcon)

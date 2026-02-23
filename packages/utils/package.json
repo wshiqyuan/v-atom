@@ -1,7 +1,5 @@
 {
   "name": "@v-atom/utils",
-  "description": "atom utils",
-  "main": "index.ts",
-  "module": "index.ts",
-  "types": "index.ts"
+  "version": "0.0.1",
+  "description": "v-atom utils"
 }

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { ButtonProps } from './types'
 import { ref } from 'vue'
-import { Icon } from '../../icon'
+import Icon from '../../icon/src/Icon.vue'
 
 defineOptions({
   name: 'VaButton',
