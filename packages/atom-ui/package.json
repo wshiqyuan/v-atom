@@ -1,0 +1,10 @@
+{
+  "name": "atom-ui",
+  "description": "A UI component library for Vue 3",
+  "author": "wshiqyuan",
+  "license": "MIT",
+  "keywords": ["vue3", "components", "ui-library", "typescript", "vue", "ui", "library"],
+  "peerDependencies": {
+    "vue": ">=3.3.0"
+  }
+}

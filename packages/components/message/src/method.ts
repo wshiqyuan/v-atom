@@ -81,3 +81,9 @@ export function createMessage(props: CreateMessageProps) {
   instances.push(instance)
   return instance
 }
+
+export function closeAllMessage() {
+  instances.forEach((instance) => {
+    instance.manualDestroy()
+  })
+}

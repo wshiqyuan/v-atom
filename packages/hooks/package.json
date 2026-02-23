@@ -21,7 +21,6 @@
   },
   "devDependencies": {
     "@vue/test-utils": "catalog:dev",
-    "tsdown": "catalog:dev",
-    "vue": "catalog:dev"
+    "tsdown": "catalog:dev"
   }
 }

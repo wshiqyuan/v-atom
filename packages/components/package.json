@@ -19,7 +19,7 @@
     "build": "vite build"
   },
   "peerDependencies": {
-    "vue": ">=3"
+    "vue": ">=3.3.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "catalog:components",
@@ -42,7 +42,6 @@
     "postcss-for": "catalog:components",
     "postcss-nested": "catalog:components",
     "vite": "catalog:dev",
-    "vite-plugin-dts": "catalog:dev",
-    "vue": "catalog:dev"
+    "vite-plugin-dts": "catalog:dev"
   }
 }

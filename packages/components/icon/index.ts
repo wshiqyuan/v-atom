@@ -1,7 +1,8 @@
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
+import { WithInstall } from '@v-atom/utils'
 import Icon from './src/Icon.vue'
 
-library.add(fas)
+export const VaIcon = WithInstall(Icon)
 
-export { Icon }
+export default VaIcon
+
+export * from './src/types'

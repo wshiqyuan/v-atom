@@ -1,24 +1,7 @@
 {
   "name": "@v-atom/utils",
   "description": "atom utils",
-  "license": "MIT",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.mts",
-      "import": "./dist/index.mjs"
-    }
-  },
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "build": "tsdown",
-    "dev": "tsdown --watch"
-  },
-  "devDependencies": {
-    "tsdown": "catalog:dev"
-  }
+  "main": "index.ts",
+  "module": "index.ts",
+  "types": "index.ts"
 }

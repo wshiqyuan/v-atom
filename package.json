@@ -39,6 +39,7 @@
     "tsdown": "catalog:dev",
     "turbo": "catalog:dev",
     "typescript": "catalog:dev",
-    "vitest": "catalog:dev"
+    "vitest": "catalog:dev",
+    "vue": "catalog:dev"
   }
 }
