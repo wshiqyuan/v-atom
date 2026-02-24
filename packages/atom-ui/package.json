@@ -1,5 +1,5 @@
 {
-  "name": "v-atom",
+  "name": "v-atom-ui",
   "type": "module",
   "version": "0.0.1",
   "description": "A UI component library for Vue 3",

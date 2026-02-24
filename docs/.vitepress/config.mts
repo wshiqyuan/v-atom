@@ -5,7 +5,7 @@ import { vitepressDemoPlugin } from 'vitepress-demo-plugin'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: 'V-Atom',
+  title: 'V-Atom-ui',
   description: 'Vue-based UI component library',
   markdown: {
     config(md) {

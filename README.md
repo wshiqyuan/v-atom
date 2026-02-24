@@ -1,10 +1,10 @@
 <div align="center">
-  <h1>V-Atom</h1>
-  <h3>V-Atom 是一个基于 Vue3 的现代化轻量级 UI 组件库，帮助开发者快速搭建项目。</h3>
+  <h1>V-Atom-ui</h1>
+  <h3>V-Atom-ui 是一个基于 Vue3 的现代化轻量级 UI 组件库，帮助开发者快速搭建项目。</h3>
 
   <p align="center">
     <a href="https://github.com/wshiqyuan/v-atom">
-      <img src="https://img.shields.io/badge/github-VAtom-blue?logo=github" />
+      <img src="https://img.shields.io/badge/github-VAtomUi-blue?logo=github" />
     </a>
     <a>
       <img src="https://img.shields.io/badge/License-MIT-green" />
@@ -28,19 +28,19 @@
 使用 npm:
 
 ```bash
-npm install v-atom
+npm install v-atom-ui
 ```
 
 使用 yarn:
 
 ```bash
-yarn add v-atom
+yarn add v-atom-ui
 ```
 
 使用 pnpm：
 
 ```bash
-pnpm add v-atom
+pnpm add v-atom-ui
 ```
 
 ## 依赖安装
@@ -56,10 +56,10 @@ npm install @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons 
 全局引入
 
 ```javascript
-import VAtom from 'v-atom'
+import VAtom from 'v-atom-ui'
 import { createApp } from 'vue'
 import App from './App.vue'
-import 'v-atom/theme/index.css'
+import 'v-atom-ui/theme/index.css'
 
 const app = createApp(App)
 
@@ -70,7 +70,7 @@ app.mount('#app')
 按需引入
 
 ```javascript
-import { VaButton } from 'v-atom'
+import { VaButton } from 'v-atom-ui'
 ```
 ## 已支持组件
 - ✅ Alert - 警告提示

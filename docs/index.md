@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "V-Atom"
+  name: "V-Atom-ui"
   text: "Vue-based UI component library"
   tagline: My great project tagline
   actions:

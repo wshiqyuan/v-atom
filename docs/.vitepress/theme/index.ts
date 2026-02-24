@@ -1,8 +1,8 @@
 import type { EnhanceAppContext } from 'vitepress'
-import VAtom from 'v-atom'
+import VAtom from 'v-atom-ui'
 import Theme from 'vitepress/theme'
 
-import 'v-atom/dist/v-atom.css'
+import 'v-atom-ui/dist/v-atom.css'
 import './custom.css'
 
 export default {

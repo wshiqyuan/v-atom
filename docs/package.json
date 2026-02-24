@@ -14,7 +14,7 @@
     "docs:preview": "vitepress preview"
   },
   "dependencies": {
-    "v-atom": "workspace:*"
+    "v-atom-ui": "workspace:*"
   },
   "devDependencies": {
     "@vitejs/plugin-vue-jsx": "catalog:dev",
