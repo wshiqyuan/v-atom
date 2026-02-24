@@ -17,6 +17,8 @@
   "module": "./dist/v-atom.js",
   "types": "./dist/types/atom-ui/index.d.ts",
   "files": [
+    "LICENSE",
+    "README.md",
     "dist"
   ],
   "scripts": {
