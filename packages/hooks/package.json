@@ -1,14 +1,19 @@
 {
   "name": "@v-atom/hooks",
   "version": "0.0.1",
-  "description": "hooks library for atom",
-  "author": "wshiqyuan",
-  "license": "MIT",
-  "main": "",
-  "module": "",
-  "files": [],
+  "description": "hooks library for v-atom",
   "scripts": {
-    "build": ""
+    "build": "tsdown",
+    "dev": "tsdown --watch"
   },
-  "dependencies": {}
+  "peerDependencies": {
+    "vue": "catalog:dev"
+  },
+  "dependencies": {
+    "@popperjs/core": "catalog:dep"
+  },
+  "devDependencies": {
+    "@vue/test-utils": "catalog:dev",
+    "tsdown": "catalog:dev"
+  }
 }

@@ -1,22 +1,18 @@
-import type { UserConfig } from "tsdown";
-import { defineConfig } from "tsdown";
-import Vue from "unplugin-vue/rolldown"
+import type { UserConfig } from 'tsdown'
+import { defineConfig } from 'tsdown'
 
 export function createTsdownConfig(options: {
-  entry: UserConfig["entry"];
-  external?: (string | RegExp)[];
+  entry: UserConfig['entry']
+  external?: (string | RegExp)[]
 }) {
   return defineConfig({
     entry: options.entry,
-    format: ["esm"],
-    platform: "neutral",
-    plugins: [Vue({ isProduction: true })],
-    dts: { vue: true },
+    format: ['esm'],
+    platform: 'neutral',
+    dts: true,
     clean: true,
     external: [
-      "vue",
-      ...(options.external || [])
+      ...(options.external || []),
     ],
-    sourcemap: false
-  });
+  })
 }

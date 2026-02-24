@@ -1,0 +1,78 @@
+.va-message-container {
+  margin-top: 1em;
+  position: fixed;
+  top: 0;
+  z-index: 2000;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  min-height: 100px;
+  pointer-events: none;
+  touch-action: none;
+  user-select: none;
+  .va-message__item {
+    pointer-events: auto;
+    touch-action: auto;
+  }
+}
+
+.va-message {
+  --va-message-bg-color: var(--va-color-info-light-9);
+  --va-message-border-color: var(--va-border-color-lighter);
+  --va-message-padding: 10px 14px;
+  --va-message-close-size: 16px;
+  --va-message-close-icon-color: var(--va-text-color-placeholder);
+  --va-message-close-hover-color: var(--va-text-color-secondary);
+}
+.va-message {
+  width: fit-content;
+  max-width: calc(100% - 32px);
+  box-sizing: border-box;
+  border-radius: var(--va-border-radius-base);
+  border-width: var(--va-border-width);
+  border-style: var(--va-border-style);
+  border-color: var(--va-message-border-color);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--va-message-bg-color);
+  padding: var(--va-message-padding);
+  display: flex;
+  align-items: center;
+  transition: all var(--va-transition-duration);
+  .va-message__content {
+    color: var(--va-message-text-color);
+    overflow-wrap: anywhere;
+  }
+  &.is-close .va-message__content {
+    padding-right: 14px;
+  }
+  .va-message__close {
+    display: flex;
+    align-items: center;
+  }
+  .va-message__close svg {
+    cursor: pointer;
+  }
+}
+@each $val in info,success,warning,danger { 
+  .va-message--$(val) {
+    --va-message-bg-color: var(--va-color-$(val)-light-9);
+    --va-message-border-color: var(--va-color-$(val)-light-8);
+    --va-message-text-color: var(--va-color-$(val));
+    .va-message__close {
+      --va-icon-color: var(--va-color-$(val));
+    }
+  }
+}
+.va-message.fade-up-enter-from,
+.va-message.fade-up-leave-to {
+  opacity: 0;
+  transform: translate(-50%, calc(-100% - 0.25em));
+}
+
+.va-message.fade-up-enter-to,
+.va-message.fade-up-leave-from {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}

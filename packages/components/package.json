@@ -2,22 +2,17 @@
   "name": "@v-atom/components",
   "version": "0.0.1",
   "description": "All components are settled here",
-  "author": "wshiqyuan",
   "license": "MIT",
-  "main": "",
-  "module": "",
-  "files": [],
-  "scripts": {
-    "build": "tsdown"
-  },
-  "peerDependencies": {
-    "vue": "catalog:"
-  },
   "dependencies": {
+    "@popperjs/core": "catalog:dep",
     "@v-atom/hooks": "workspace:*",
-    "@v-atom/utils": "workspace:*"
+    "@v-atom/utils": "workspace:*",
+    "lodash-es": "catalog:dep"
   },
   "devDependencies": {
-    "vue": "catalog:"
+    "@vitejs/plugin-vue": "catalog:dev",
+    "@vitejs/plugin-vue-jsx": "catalog:dev",
+    "@vue/test-utils": "catalog:dev",
+    "jsdom": "catalog:dev"
   }
 }

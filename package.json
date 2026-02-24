@@ -1,5 +1,6 @@
 {
   "name": "v-atom",
+  "type": "module",
   "workspaces": [
     "packages/*",
     "docs"
@@ -14,17 +15,42 @@
     "ts",
     "ui"
   ],
+  "engines": {
+    "node": "20.19.0"
+  },
   "scripts": {
-    "build": "pnpm -r --filter './packages/*' run build"
+    "test": "vitest",
+    "build": "turbo build",
+    "lint": "eslint . && oxlint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "catalog:components",
+    "@fortawesome/free-solid-svg-icons": "catalog:components",
+    "@fortawesome/vue-fontawesome": "catalog:components",
+    "@types/lodash-es": "catalog:types",
+    "async-validator": "catalog:components",
+    "lodash-es": "catalog:dep"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "catalog:",
-    "eslint": "catalog:",
-    "tsdown": "catalog:",
-    "turbo": "catalog:",
-    "typescript": "catalog:",
-    "unplugin-vue": "catalog:",
-    "vue": "catalog:",
-    "vue-tsc": "catalog:"
+    "@antfu/eslint-config": "catalog:dev",
+    "@antfu/ni": "catalog:dev",
+    "@vitejs/plugin-vue": "catalog:dev",
+    "@vitejs/plugin-vue-jsx": "catalog:dev",
+    "eslint": "catalog:dev",
+    "eslint-plugin-oxlint": "catalog:dev",
+    "oxlint": "catalog:dev",
+    "postcss-color-mix": "catalog:components",
+    "postcss-each": "catalog:components",
+    "postcss-each-variables": "catalog:components",
+    "postcss-for": "catalog:components",
+    "postcss-nested": "catalog:components",
+    "tsdown": "catalog:dev",
+    "turbo": "catalog:dev",
+    "typescript": "catalog:dev",
+    "vite": "catalog:dev",
+    "vite-plugin-dts": "catalog:dev",
+    "vitest": "catalog:dev",
+    "vue": "catalog:dev"
   }
 }

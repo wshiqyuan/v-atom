@@ -1,0 +1,16 @@
+.va-icon {
+  --va-icon-color: inherit;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  fill: currentColor;
+  color: var(--va-icon-color);
+  font-size: inherit;
+}
+
+@each $val in primary,info,success,warning,danger {
+  .va-icon--$(val) {
+    --va-icon-color: var(--va-color-${val});
+  }
+}

@@ -1,0 +1,56 @@
+.va-collapse {
+  --va-collapse-border-color: var(--va-border-color-light);
+  --va-collapse-header-height: 48px;
+  --va-collapse-header-bg-color: var(--va-fill-color-blank);
+  --va-collapse-header-text-color: var(--va-text-color-primary);
+  --va-collapse-header-font-size: 13px;
+  --va-collapse-content-bg-color: var(--va-fill-color-blank);
+  --va-collapse-content-font-size: 13px;
+  --va-collapse-content-text-color: var(--va-text-color-primary);
+  --va-collapse-disabled-text-color: var(--va-disabled-text-color);
+  --va-collapse-disabled-border-color: var(--va-border-color-lighter);
+  border-top: 1px solid var(--va-collapse-border-color);
+  border-bottom: 1px solid var(--va-collapse-border-color);
+}
+.va-collapse-item__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--va-collapse-header-height);
+  line-height: var(--va-collapse-header-height);
+  background-color: var(--va-collapse-header-bg-color);
+  color: var(--va-collapse-header-text-color);
+  cursor: pointer;
+  font-size: var(--va-collapse-header-font-size);
+  font-weight: 500;
+  transition: border-bottom-color var(--va-transition-duration);
+  outline: none;
+  border-bottom: 1px solid var(--va-collapse-border-color);
+  &.is-disabled {
+    color: var(--va-collapse-disabled-text-color);
+    cursor: not-allowed;
+    background-image: none;
+  }
+  &.is-active {
+    border-bottom-color: transparent;
+    .header-angle {
+      transform: rotate(90deg);
+    }
+  }
+  .header-angle {
+    transition: transform var(--va-transition-duration);
+  }
+}
+.va-collapse-item__content {
+  will-change: height;
+  background-color: var(--va-collapse-content-bg-color);
+  overflow: hidden;
+  box-sizing: border-box;
+  font-size: var(--va-collapse-content-font-size);
+  color: var(--va-collapse-content-text-color);
+  border-bottom: 1px solid var(--va-collapse-border-color);
+  padding-bottom: 25px;
+}
+.slide-enter-active, .slide-leave-active {
+  transition: height var(--va-transition-duration);
+}

@@ -1,14 +1,5 @@
 {
   "name": "@v-atom/utils",
   "version": "0.0.1",
-  "description": "atom utils",
-  "author": "wshiqyuan",
-  "license": "MIT",
-  "main": "",
-  "module": "",
-  "files": [],
-  "scripts": {
-    "build": ""
-  },
-  "dependencies": {}
+  "description": "v-atom utils"
 }

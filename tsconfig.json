@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "ES2020",
     "jsx": "preserve",
-    // 指定需要包含的库文件
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "moduleResolution": "Bundler",
@@ -16,12 +15,13 @@
     "noUnusedLocals": true,
     "declaration": true,
     "declarationMap": true,
+    "noEmitOnError": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
-  "include": ["packages/**/*.ts", "tsdown.config.ts"],
+  "include": ["packages/**/*.ts", "docs/**/*.ts"],
   "exclude": [
     "node_modules",
     "dist",

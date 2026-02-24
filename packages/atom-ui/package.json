@@ -1,0 +1,30 @@
+{
+  "name": "v-atom",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "A UI component library for Vue 3",
+  "author": "wshiqyuan",
+  "license": "MIT",
+  "keywords": ["vue3", "components", "ui-library", "typescript", "vue", "ui", "library"],
+  "exports": {
+    ".": {
+      "types": "./dist/types/atom-ui/index.d.ts",
+      "import": "./dist/v-atom.js"
+    },
+    "./*": "./*"
+  },
+  "main": "./dist/v-atom.js",
+  "module": "./dist/v-atom.js",
+  "types": "./dist/types/atom-ui/index.d.ts",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "vue": ">=3.3.0"
+  }
+}
