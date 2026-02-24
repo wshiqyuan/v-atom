@@ -14,8 +14,7 @@
     "docs:preview": "vitepress preview"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "catalog:components",
-    "@fortawesome/free-solid-svg-icons": "catalog:components"
+    "v-atom": "workspace:*"
   },
   "devDependencies": {
     "@vitejs/plugin-vue-jsx": "catalog:dev",

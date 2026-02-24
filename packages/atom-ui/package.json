@@ -6,6 +6,19 @@
   "author": "wshiqyuan",
   "license": "MIT",
   "keywords": ["vue3", "components", "ui-library", "typescript", "vue", "ui", "library"],
+  "exports": {
+    ".": {
+      "types": "./dist/types/atom-ui/index.d.ts",
+      "import": "./dist/v-atom.js"
+    },
+    "./*": "./*"
+  },
+  "main": "./dist/v-atom.js",
+  "module": "./dist/v-atom.js",
+  "types": "./dist/types/atom-ui/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "vite build"
   },

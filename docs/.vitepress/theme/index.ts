@@ -1,11 +1,13 @@
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
-
+import type { EnhanceAppContext } from 'vitepress'
+import VAtom from 'v-atom'
 import Theme from 'vitepress/theme'
 
-import '../../../packages/theme/index.css'
+import 'v-atom/dist/v-atom.css'
 import './custom.css'
 
-library.add(fas)
-
-export default Theme
+export default {
+  ...Theme,
+  enhanceApp({ app }: EnhanceAppContext) {
+    app.use(VAtom)
+  },
+}

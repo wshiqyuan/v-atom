@@ -1,7 +1,3 @@
-<script setup>
-import VaButton from '../../../packages/components/button/src/Button.vue'
-</script>
-
 <template>
   <VaButton> hello </VaButton>
   <VaButton type="primary">

@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import Select from '../../../packages/components/select/src/Select.vue'
 
 const test = ref('')
 const states = [
@@ -85,7 +84,7 @@ function handleFetch(query) {
 </script>
 
 <template>
-  <Select
+  <VaSelect
     v-model="test"
     placeholder="搜索远程结果"
     filterable

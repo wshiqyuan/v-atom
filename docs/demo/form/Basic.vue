@@ -1,11 +1,6 @@
 <script setup>
 import { reactive, ref } from 'vue'
 
-import Button from '../../../packages/components/button/src/Button.vue'
-import Form from '../../../packages/components/form/src/Form.vue'
-import FormItem from '../../../packages/components/form/src/FormItem.vue'
-import Input from '../../../packages/components/input/src/Input.vue'
-
 const formRef = ref()
 
 const model = reactive({
@@ -44,25 +39,25 @@ function reset() {
 </script>
 
 <template>
-  <Form ref="formRef" :model="model" :rules="rules">
-    <FormItem label="the email" prop="email">
-      <Input v-model="model.email" />
-    </FormItem>
-    <FormItem label="the password" prop="password">
-      <Input v-model="model.password" type="password" />
-    </FormItem>
-    <FormItem label="confirm password" prop="confirmPwd">
-      <Input v-model="model.confirmPwd" type="password" />
-    </FormItem>
+  <VaForm ref="formRef" :model="model" :rules="rules">
+    <VaFormItem label="the email" prop="email">
+      <VaInput v-model="model.email" />
+    </VaFormItem>
+    <VaFormItem label="the password" prop="password">
+      <VaInput v-model="model.password" type="password" />
+    </VaFormItem>
+    <VaFormItem label="confirm password" prop="confirmPwd">
+      <VaInput v-model="model.confirmPwd" type="password" />
+    </VaFormItem>
     <div :style="{ textAlign: 'center' }">
-      <Button type="primary" @click.prevent="submit">
+      <VaButton type="primary" @click.prevent="submit">
         Submit
-      </Button>
-      <Button @click.prevent="reset">
+      </VaButton>
+      <VaButton @click.prevent="reset">
         Reset
-      </Button>
+      </VaButton>
     </div>
-  </Form>
+  </VaForm>
   <div>
     form value:
     <pre>{{ model }}</pre>

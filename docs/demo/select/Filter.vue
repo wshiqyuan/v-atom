@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import Select from '../../../packages/components/select/src/Select.vue'
 
 const test = ref('')
 const options2 = [
@@ -12,7 +11,7 @@ const options2 = [
 </script>
 
 <template>
-  <Select
+  <VaSelect
     v-model="test"
     placeholder="可以过滤的选择器，请输入"
     :options="options2"

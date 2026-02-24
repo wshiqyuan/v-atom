@@ -1,6 +1,5 @@
 <script setup>
 import { h, ref } from 'vue'
-import Select from '../../../packages/components/select/src/Select.vue'
 
 const test = ref('')
 const options2 = [
@@ -15,7 +14,7 @@ function customRender(option) {
 </script>
 
 <template>
-  <Select v-model="test" placeholder="基础选择器，请选择" :options="options2" :render-label="customRender" />
+  <VaSelect v-model="test" placeholder="基础选择器，请选择" :options="options2" :render-label="customRender" />
 </template>
 
 <style>

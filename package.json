@@ -25,7 +25,11 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "catalog:components",
+    "@fortawesome/free-solid-svg-icons": "catalog:components",
+    "@fortawesome/vue-fontawesome": "catalog:components",
     "@types/lodash-es": "catalog:types",
+    "async-validator": "catalog:components",
     "lodash-es": "catalog:dep"
   },
   "devDependencies": {
