@@ -2,7 +2,7 @@
   <h1>V-Atom-ui</h1>
   <h3>V-Atom-ui 是一个基于 Vue3 的现代化轻量级 UI 组件库，帮助开发者快速搭建项目。</h3>
 
-  <p align="center">
+<p align="center">
     <a href="https://github.com/wshiqyuan/v-atom">
       <img src="https://img.shields.io/badge/github-VAtomUi-blue?logo=github" />
     </a>
@@ -59,7 +59,7 @@ npm install @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons 
 import VAtom from 'v-atom-ui'
 import { createApp } from 'vue'
 import App from './App.vue'
-import 'v-atom-ui/theme/index.css'
+import 'v-atom-ui/dist/v-atom.css'
 
 const app = createApp(App)
 
@@ -72,7 +72,9 @@ app.mount('#app')
 ```javascript
 import { VaButton } from 'v-atom-ui'
 ```
+
 ## 已支持组件
+
 - ✅ Alert - 警告提示
 - ✅ Button - 按钮
 - ✅ Collapse - 折叠面板
@@ -86,4 +88,5 @@ import { VaButton } from 'v-atom-ui'
 - ✅ Tooltip - 文字提示
 
 ## 许可证
-[MIT](./LICENSE) License
+
+[MIT](https://github.com/wshiqyuan/v-atom/blob/develop/LICENSE) License
