@@ -57,7 +57,7 @@ export function getLastInstance() {
 
 export function getLastBottomOffset(id: string) {
   const idx = instances.findIndex(instance => instance.id === id)
-  console.log('idx', id, idx, instances.length)
+
   if (idx <= 0) {
     return 0
   }
