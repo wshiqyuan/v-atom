@@ -17,7 +17,6 @@ export interface MessageContext {
   vnode: VNode
   vm: ComponentInternalInstance
   props: MessageProps
-  manualDestroy: () => void
+  destory: () => void
 }
-
 export type CreateMessageProps = Omit<MessageProps, 'onDestroy' | 'id' | 'zIndex'>
