@@ -16,9 +16,11 @@ const props = withDefaults(defineProps<MessageProps>(), {
   offset: 20,
   transitionName: 'fade-up',
 })
+
 const visible = ref(false)
 const messageRef = ref<HTMLDivElement>()
 const height = ref(0)
+
 const lastOffset = computed(() => getLastBottomOffset(props.id))
 const topOffset = computed(() => props.offset + lastOffset.value)
 const bottomOffset = computed(() => height.value + topOffset.value)
@@ -26,6 +28,7 @@ const cssStyle = computed(() => ({
   top: `${topOffset.value}px`,
   zIndex: props.zIndex,
 }))
+
 let timer: any
 function startTimer() {
   if (props.duration === 0)
@@ -34,26 +37,33 @@ function startTimer() {
     visible.value = false
   }, props.duration)
 }
+
 function clearTimer() {
   clearTimeout(timer)
 }
+
 onMounted(async () => {
   visible.value = true
   startTimer()
 })
+
 function keydown(e: Event) {
   const event = e as KeyboardEvent
   if (event.code === 'Escape') {
     visible.value = false
   }
 }
+
 useEventListener(document, 'keydown', keydown)
+
 function destroyComponent() {
   props.onDestroy()
 }
+
 function updateHeight() {
   height.value = messageRef.value!.getBoundingClientRect().height
 }
+
 defineExpose({
   bottomOffset,
   visible,

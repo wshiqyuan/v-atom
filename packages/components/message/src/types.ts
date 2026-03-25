@@ -19,4 +19,5 @@ export interface MessageContext {
   props: MessageProps
   destroy: () => void
 }
+
 export type CreateMessageProps = Omit<MessageProps, 'onDestroy' | 'id' | 'zIndex'>
