@@ -39,7 +39,7 @@ export function createMessage(props: CreateMessageProps) {
     vnode,
     vm,
     props: newProps,
-    destory: manualDestroy,
+    destroy: manualDestroy,
   }
   instances.push(instance)
   return instance
@@ -62,6 +62,6 @@ export function getLastBottomOffset(id: string) {
 
 export function closeAllMessage() {
   instances.forEach((instance) => {
-    instance.destory()
+    instance.destroy()
   })
 }

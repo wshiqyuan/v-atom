@@ -58,11 +58,11 @@ describe('message.method', () => {
     vi.useRealTimers()
   })
 
-  it('destory hides message', async () => {
+  it('destroy hides message', async () => {
     const instance: any = createMessage({ message: 'hide me' })
     expect(instance).toBeTruthy()
 
-    instance.destory()
+    instance.destroy()
     expect(instance.vm.exposed!.visible.value).toBe(false)
 
     const inst2: any = createMessage({ message: 'with-close', showClose: true })
