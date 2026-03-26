@@ -11,9 +11,12 @@ vi.mock('@fortawesome/vue-fontawesome', () => ({
 }))
 
 function cleanup() {
-  const container = document.querySelector('.va-message-container')
-  if (container && container.parentNode)
-    container.parentNode.removeChild(container)
+  const containers = document.querySelectorAll('.va-message')
+  containers.forEach((container) => {
+    if (container && container.parentNode) {
+      container.parentNode.removeChild(container)
+    }
+  })
 }
 
 afterEach(() => {
@@ -24,7 +27,7 @@ afterEach(() => {
 describe('message.method', () => {
   it('creates and shows message', () => {
     const instance: any = createMessage({ message: 'hello' })
-    const container = document.querySelector('.va-message-container')
+    const container = document.querySelector('.va-message__content')
     expect(instance).toBeTruthy()
     expect(container).toBeTruthy()
     expect(container!.textContent).toContain('hello')
@@ -55,11 +58,11 @@ describe('message.method', () => {
     vi.useRealTimers()
   })
 
-  it('manualDestroy hides message', async () => {
+  it('destroy hides message', async () => {
     const instance: any = createMessage({ message: 'hide me' })
     expect(instance).toBeTruthy()
 
-    instance.manualDestroy()
+    instance.destroy()
     expect(instance.vm.exposed!.visible.value).toBe(false)
 
     const inst2: any = createMessage({ message: 'with-close', showClose: true })
@@ -88,7 +91,7 @@ describe('message.method', () => {
   it('renders VNode messages', () => {
     const vnode = h('strong', 'VNodeContent')
     const instance: any = createMessage({ message: vnode })
-    const container = document.querySelector('.va-message-container')
+    const container = document.querySelector('.va-message__content')
     expect(container).toBeTruthy()
     expect(container!.textContent).toContain('VNodeContent')
     instance.props.onDestroy()

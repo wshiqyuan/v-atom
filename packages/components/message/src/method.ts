@@ -1,61 +1,29 @@
 import type { CreateMessageProps, MessageContext } from './types'
 import { useZIndex } from '@v-atom/hooks/index'
-import { h, render } from 'vue'
+import { h, render, shallowReactive } from 'vue'
 import MessageConstructor from './Message.vue'
 
 let seed = 1
-
-const instances: MessageContext[] = []
-
-const injectContainer = (() => {
-  if (typeof window !== 'undefined') {
-    const container = document.createElement('div')
-    container.className = 'va-message-container'
-    return container
-  }
-  return null
-})()
-
-function createBox() {
-  const item = document.createElement('div')
-  item.className = 'va-message__item'
-  if (!injectContainer)
-    return item
-  injectContainer.appendChild(item)
-  return item
-}
+const instances: MessageContext[] = shallowReactive([])
 
 export function createMessage(props: CreateMessageProps) {
-  if (!injectContainer)
-    return
-
-  if (!injectContainer.parentNode) {
-    document.body.appendChild(injectContainer)
-  }
-
   const { nextZIndex } = useZIndex()
-
   const id = `message_${seed++}`
-
-  const $dom = createBox()
+  const container = document.createElement('div')
 
   const destroy = () => {
+    // 删除数组中的实例
     const idx = instances.findIndex(instance => instance.id === id)
     if (idx === -1)
       return
     instances.splice(idx, 1)
-    render(null, $dom)
-    $dom.remove()
-
-    if (injectContainer && instances.length === 0) {
-      injectContainer.remove()
-    }
+    render(null, container)
   }
 
   const manualDestroy = () => {
-    const _instance = instances.find(instance => instance.id === id)
-    if (_instance) {
-      _instance.vm.exposed!.visible.value = false
+    const instance = instances.find(instance => instance.id === id)
+    if (instance) {
+      instance.vm.exposed!.visible.value = false
     }
   }
 
@@ -65,25 +33,42 @@ export function createMessage(props: CreateMessageProps) {
     zIndex: nextZIndex(),
     onDestroy: destroy,
   }
-
   const vnode = h(MessageConstructor, newProps)
-  render(vnode, $dom)
+  render(vnode, container)
+
+  document.body.appendChild(container.firstElementChild!)
 
   const vm = vnode.component!
-
   const instance = {
     id,
     vnode,
     vm,
     props: newProps,
-    manualDestroy,
+    destroy: manualDestroy,
   }
   instances.push(instance)
+
   return instance
+}
+
+export function getLastInstance() {
+  return instances.at(-1)
+}
+
+export function getLastBottomOffset(id: string) {
+  const idx = instances.findIndex(instance => instance.id === id)
+
+  if (idx <= 0) {
+    return 0
+  }
+  else {
+    const prev = instances[idx - 1]
+    return prev.vm.exposed!.bottomOffset.value
+  }
 }
 
 export function closeAllMessage() {
   instances.forEach((instance) => {
-    instance.manualDestroy()
+    instance.destroy()
   })
 }

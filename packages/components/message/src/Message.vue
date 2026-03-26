@@ -1,33 +1,38 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import type { MessageProps } from './types'
 import { useEventListener } from '@v-atom/hooks/index'
 import { computed, onMounted, ref } from 'vue'
 import RenderVnode from '../../common/RenderVnode'
 import Icon from '../../icon/src/Icon.vue'
+import { getLastBottomOffset } from './method'
 
 defineOptions({
   name: 'VaMessage',
 })
 
 const props = withDefaults(defineProps<MessageProps>(), {
-  duration: 3000,
   type: 'info',
+  duration: 3000,
   offset: 20,
   transitionName: 'fade-up',
 })
 
 const visible = ref(false)
+const messageRef = ref<HTMLDivElement>()
+const height = ref(0)
 
+const lastOffset = computed(() => getLastBottomOffset(props.id))
+const topOffset = computed(() => props.offset + lastOffset.value)
+const bottomOffset = computed(() => height.value + topOffset.value)
 const cssStyle = computed(() => ({
-  marginTop: `${props.offset}px`,
+  top: `${topOffset.value}px`,
   zIndex: props.zIndex,
 }))
 
 let timer: any
 function startTimer() {
-  if (props.duration === 0) {
+  if (props.duration === 0)
     return
-  }
   timer = setTimeout(() => {
     visible.value = false
   }, props.duration)
@@ -37,7 +42,7 @@ function clearTimer() {
   clearTimeout(timer)
 }
 
-onMounted(() => {
+onMounted(async () => {
   visible.value = true
   startTimer()
 })
@@ -55,7 +60,12 @@ function destroyComponent() {
   props.onDestroy()
 }
 
+function updateHeight() {
+  height.value = messageRef.value!.getBoundingClientRect().height
+}
+
 defineExpose({
+  bottomOffset,
   visible,
 })
 </script>
@@ -64,15 +74,17 @@ defineExpose({
   <Transition
     :name="transitionName"
     @after-leave="destroyComponent"
+    @enter="updateHeight"
   >
     <div
       v-show="visible"
+      ref="messageRef"
       class="va-message"
-      role="alert"
       :class="{
         [`va-message--${type}`]: type,
         'is-close': showClose,
       }"
+      role="alert"
       :style="cssStyle"
       @mouseenter="clearTimer"
       @mouseleave="startTimer"
