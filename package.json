@@ -22,7 +22,8 @@
     "test": "vitest",
     "build": "turbo build",
     "lint": "eslint . && oxlint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "prepare": "husky"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "catalog:components",
@@ -35,10 +36,13 @@
   "devDependencies": {
     "@antfu/eslint-config": "catalog:dev",
     "@antfu/ni": "catalog:dev",
+    "@commitlint/cli": "catalog:dev",
+    "@commitlint/config-conventional": "catalog:dev",
     "@vitejs/plugin-vue": "catalog:dev",
     "@vitejs/plugin-vue-jsx": "catalog:dev",
     "eslint": "catalog:dev",
     "eslint-plugin-oxlint": "catalog:dev",
+    "husky": "catalog:dev",
     "oxlint": "catalog:dev",
     "postcss-color-mix": "catalog:components",
     "postcss-each": "catalog:components",
@@ -52,5 +56,8 @@
     "vite-plugin-dts": "catalog:dev",
     "vitest": "catalog:dev",
     "vue": "catalog:dev"
+  },
+  "lint-staged": {
+    "*.{vue,js,ts,jsx,tsx}": "eslint --fix"
   }
 }
